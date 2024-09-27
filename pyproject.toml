@@ -61,6 +61,9 @@ ignore = [
     "PLR0915", # too-many-statements
 ]
 
+[tool.ruff.lint.isort]
+known-first-party = ["xiangting", "tests"]
+
 [tool.ruff.lint.pycodestyle]
 max-doc-length = 72
 ignore-overlong-task-comments = true
