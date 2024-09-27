@@ -1,0 +1,73 @@
+[build-system]
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "xiangting"
+version = "0.1.0"
+description = "Python bindings for xiangting"
+authors = [{ name = "Apricot S." }]
+license = { text = "MIT License" }
+readme = "README.md"
+requires-python = ">=3.12"
+keywords = ["mahjong"]
+classifiers = [
+    "Private :: Do Not Upload",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Repository = "https://github.com/Apricot-S/xiangting-py"
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+
+[tool.uv]
+dev-dependencies = [
+    "mypy>=1.11.2,<2",
+    "ruff>=0.6.8,<0.7",
+    "pytest>=8.3.3,<9",
+    "maturin>=1.7.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+src = ["python"]
+line-length = 79
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D", # pydocstyle
+
+    # "C901",    # complex-structure
+    "ANN002",  # missing-type-args
+    "ANN003",  # missing-type-kwargs
+    "ANN101",  # missing-type-self
+    "ANN102",  # missing-type-cls
+    "TD002",   # missing-todo-author
+    "TD003",   # missing-todo-link
+    "PLR0911", # too-many-return-statements
+    "PLR0912", # too-many-branches
+    "PLR0913", # too-many-arguments
+    "PLR0915", # too-many-statements
+]
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 72
+ignore-overlong-task-comments = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.extend-per-file-ignores]
+"./examples/*" = ["S101", "INP001", "T201", "TRY004", "PLR2004"]
+"./tests/*" = ["S101", "SLF001"]
