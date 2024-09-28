@@ -34,6 +34,7 @@ dev-dependencies = [
     "pytest>=8.3.3,<9",
     "maturin>=1.7.1",
     "pytest-benchmark>=4.0.0",
+    "mahjong>=1.2.1",
 ]
 
 [tool.pytest.ini_options]
@@ -78,5 +79,5 @@ convention = "google"
 "./tests/*" = ["S101", "SLF001"]
 
 [[tool.mypy.overrides]]
-module = ["pytest_benchmark.*"]
+module = ["pytest_benchmark.*", "mahjong.*"]
 ignore_missing_imports = true
