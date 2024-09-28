@@ -3,12 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-xiangting documentation
-=======================
+:github_url: https://github.com/Apricot-S/xiangting-py
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+xiangting-py documentation
+===========================
 
 
 .. toctree::
@@ -17,4 +15,3 @@ documentation for details.
 
 .. automodule:: xiangting
    :members:
-   :undoc-members: tests
