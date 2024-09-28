@@ -33,10 +33,12 @@ dev-dependencies = [
     "ruff>=0.6.8,<0.7",
     "pytest>=8.3.3,<9",
     "maturin>=1.7.1",
+    "pytest-benchmark>=4.0.0",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "--benchmark-skip"
 
 [tool.ruff]
 target-version = "py312"
@@ -74,3 +76,7 @@ convention = "google"
 [tool.ruff.lint.extend-per-file-ignores]
 "./examples/*" = ["S101", "INP001", "T201", "TRY004", "PLR2004"]
 "./tests/*" = ["S101", "SLF001"]
+
+[[tool.mypy.overrides]]
+module = ["pytest_benchmark.*"]
+ignore_missing_imports = true
