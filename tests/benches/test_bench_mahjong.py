@@ -16,10 +16,10 @@ NUM_HAND: Final = NUM_ROUND + NUM_WARMUP_ROUND
 
 def test_mahjong_normal(benchmark: BenchmarkFixture) -> None:
     rng = random_hand.create_rng()
-    normal_hands = [
+    hands = [
         random_hand.generate_random_pure_hand(rng) for _ in range(NUM_HAND)
     ]
-    hand_iter = iter(normal_hands)
+    hand_iter = iter(hands)
 
     def setup() -> tuple[tuple[list[int], None], dict]:
         return (next(hand_iter), None), {}
@@ -36,11 +36,11 @@ def test_mahjong_normal(benchmark: BenchmarkFixture) -> None:
 
 def test_mahjong_half_flush(benchmark: BenchmarkFixture) -> None:
     rng = random_hand.create_rng()
-    normal_hands = [
+    hands = [
         random_hand.generate_random_half_flush_pure_hand(rng)
         for _ in range(NUM_HAND)
     ]
-    hand_iter = iter(normal_hands)
+    hand_iter = iter(hands)
 
     def setup() -> tuple[tuple[list[int], None], dict]:
         return (next(hand_iter), None), {}
@@ -57,11 +57,11 @@ def test_mahjong_half_flush(benchmark: BenchmarkFixture) -> None:
 
 def test_mahjong_full_flush(benchmark: BenchmarkFixture) -> None:
     rng = random_hand.create_rng()
-    normal_hands = [
+    hands = [
         random_hand.generate_random_full_flush_pure_hand(rng)
         for _ in range(NUM_HAND)
     ]
-    hand_iter = iter(normal_hands)
+    hand_iter = iter(hands)
 
     def setup() -> tuple[tuple[list[int], None], dict]:
         return (next(hand_iter), None), {}
@@ -78,11 +78,11 @@ def test_mahjong_full_flush(benchmark: BenchmarkFixture) -> None:
 
 def test_mahjong_non_simple(benchmark: BenchmarkFixture) -> None:
     rng = random_hand.create_rng()
-    normal_hands = [
+    hands = [
         random_hand.generate_random_non_simple_pure_hand(rng)
         for _ in range(NUM_HAND)
     ]
-    hand_iter = iter(normal_hands)
+    hand_iter = iter(hands)
 
     def setup() -> tuple[tuple[list[int], None], dict]:
         return (next(hand_iter), None), {}
