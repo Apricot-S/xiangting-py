@@ -13,13 +13,14 @@ class FuluMianzi:
             self,
             tile: int,
             position: ClaimedTilePosition,
+            /,
         ) -> None: ...
 
     class Kezi(FuluMianzi):
-        def __init__(self, tile: int) -> None: ...
+        def __init__(self, tile: int, /) -> None: ...
 
     class Gangzi(FuluMianzi):
-        def __init__(self, tile: int) -> None: ...
+        def __init__(self, tile: int, /) -> None: ...
 
 def calculate_replacement_number(
     bingpai: list[int],
