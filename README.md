@@ -4,6 +4,10 @@ Python bindings for [xiangting](https://github.com/Apricot-S/xiangting).
 
 See also [xiangting](https://github.com/Apricot-S/xiangting) for more information.
 
+Documentation:
+
+- [API reference (main branch)](https://apricot-s.github.io/xiangting-py/)
+
 ## Usage
 
 The hand is represented by the number of each tile in an array of `list[int]`. The correspondence between the index and the tile is shown in the table below.
