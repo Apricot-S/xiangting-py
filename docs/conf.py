@@ -36,18 +36,6 @@ autosummary_generate = True
 autosummary_imported_members = True
 napoleon_google_docstring = True
 
-
-def skip_member(app, what, name, obj, skip, options):
-    exclude_classes = ["FuluMianzi"]
-    if name in exclude_classes:
-        return True
-    return skip
-
-
-def setup(app):
-    app.connect("autodoc-skip-member", skip_member)
-
-
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
