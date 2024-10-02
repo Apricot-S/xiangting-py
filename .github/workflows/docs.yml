@@ -34,12 +34,8 @@ jobs:
           echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
           echo "VIRTUAL_ENV=$GITHUB_WORKSPACE/.venv" >> $GITHUB_ENV
 
-      - name: Install Python dependencies
-        working-directory: docs
-        run: uv pip install -r requirements-docs.txt
-
       - name: Build wheel
-        run: uv build && uv sync --no-dev --reinstall
+        run: uv build && uv sync --reinstall
 
       - name: Build Python documentation
         working-directory: docs
