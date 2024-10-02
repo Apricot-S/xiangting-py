@@ -6,9 +6,12 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "xiangting-py"
+project = "xiangting"
 copyright = "2024, Apricot S."
 author = "Apricot S."
+release = "0.1.0"
+version = release
+
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

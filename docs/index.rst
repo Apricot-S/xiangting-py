@@ -15,3 +15,6 @@ xiangting-py documentation
 
 .. automodule:: xiangting
    :members:
+
+.. automodule:: internal.xiangting
+   :members:
