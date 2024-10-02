@@ -39,7 +39,7 @@ jobs:
         run: uv pip install -r requirements-docs.txt
 
       - name: Build wheel
-        run: uv build && uv sync --reinstall
+        run: uv build && uv sync --no-dev --reinstall
 
       - name: Build Python documentation
         working-directory: docs
