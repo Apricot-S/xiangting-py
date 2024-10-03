@@ -23,11 +23,6 @@ sys.path.insert(0, str(Path("..", "docs").resolve()))
 
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.todo",
-    "sphinx.ext.inheritance_diagram",
-    "sphinx.ext.autosectionlabel",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
 ]
