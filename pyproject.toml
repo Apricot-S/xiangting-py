@@ -37,6 +37,7 @@ dev-dependencies = [
     "mahjong>=1.2.1",
     "sphinx>=7.4.7,<8",
     "sphinx-rtd-theme>=2.0.0",
+    "scanpydoc[typehints]>=0.14.1",
 ]
 
 [tool.pytest.ini_options]

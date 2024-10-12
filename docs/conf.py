@@ -25,10 +25,13 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
+    "scanpydoc.elegant_typehints",
 ]
 
-autosummary_generate = True
-autosummary_imported_members = True
+qualname_overrides = {
+    "internal.xiangting.FuluMianzi": "xiangting.FuluMianzi",
+}
+
 napoleon_google_docstring = True
 
 templates_path = ["_templates"]
