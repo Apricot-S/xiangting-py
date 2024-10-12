@@ -84,13 +84,10 @@ convention = "google"
 "./examples/*" = [
     "S101",    # assert
     "INP001",  # implicit-namespace-package
-    "T201",    # print
-    "TRY004",  # type-check-without-type-error
     "PLR2004", # magic-value-comparison
 ]
 "./tests/*" = [
-    "S101",   # assert
-    "SLF001", # private-member-access
+    "S101", # assert
 ]
 
 [tool.mypy]
