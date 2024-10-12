@@ -8,6 +8,22 @@ Documentation:
 
 - [API reference (main branch)](https://apricot-s.github.io/xiangting-py/)
 
+## Installation
+
+There are two options to install this library:
+
+### Option 1: Install from wheel
+
+(TODO)
+
+### Option 2: Build from source
+
+Requires `cargo`:
+
+```sh
+xiangting-py$ pip install .
+```
+
 ## Usage
 
 The hand is represented by the number of each tile in an array of `list[int]`. The correspondence between the index and the tile is shown in the table below.
