@@ -81,8 +81,17 @@ convention = "google"
 "docs/**.py" = ["ALL"]
 
 [tool.ruff.lint.extend-per-file-ignores]
-"./examples/*" = ["S101", "INP001", "T201", "TRY004", "PLR2004"]
-"./tests/*" = ["S101", "SLF001"]
+"./examples/*" = [
+    "S101",    # assert
+    "INP001",  # implicit-namespace-package
+    "T201",    # print
+    "TRY004",  # type-check-without-type-error
+    "PLR2004", # magic-value-comparison
+]
+"./tests/*" = [
+    "S101",   # assert
+    "SLF001", # private-member-access
+]
 
 [tool.mypy]
 exclude = ["^docs/.*\\.py$"]
