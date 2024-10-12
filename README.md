@@ -14,7 +14,14 @@ There are two options to install this library:
 
 ### Option 1: Install from wheel
 
-(TODO)
+1. Download the wheel file for your platform from the [releases page](https://github.com/Apricot-S/xiangting-py/releases/latest).
+2. Run the following command:
+
+```sh
+pip install PATH/TO/xiangting-{version}-{python tag}-{abitag}-{platform tag}.whl
+```
+
+Replace `PATH/TO/xiangting-{version}-{python tag}-{abitag}-{platform tag}.whl` with the actual path to the wheel file on your system.
 
 ### Option 2: Build from source
 
