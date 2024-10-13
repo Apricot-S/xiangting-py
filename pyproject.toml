@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "xiangting"
-version = "1.0.0"
+version = "1.0.1"
 description = "Python bindings for xiangting"
 authors = [{ name = "Apricot S." }]
 license = { text = "MIT License" }
@@ -81,8 +81,14 @@ convention = "google"
 "docs/**.py" = ["ALL"]
 
 [tool.ruff.lint.extend-per-file-ignores]
-"./examples/*" = ["S101", "INP001", "T201", "TRY004", "PLR2004"]
-"./tests/*" = ["S101", "SLF001"]
+"./examples/*" = [
+    "S101",    # assert
+    "INP001",  # implicit-namespace-package
+    "PLR2004", # magic-value-comparison
+]
+"./tests/*" = [
+    "S101", # assert
+]
 
 [tool.mypy]
 exclude = ["^docs/.*\\.py$"]

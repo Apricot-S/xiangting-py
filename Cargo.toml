@@ -1,7 +1,24 @@
 [package]
 name = "xiangting-py"
-version = "1.0.0"
+version = "1.0.1"
+description = "Python bindings for xiangting"
+authors = ["Apricot S."]
 edition = "2021"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/Apricot-S/xiangting-py"
+keywords = ["mahjong"]
+categories = ["algorithms"]
+exclude = [
+    "/.devcontainer/**/*",
+    "/.github/**/*",
+    "/docs/**/*",
+    "/examples/**/*",
+    "/scripts/**/*",
+    "/tests/**/*",
+    "/.gitignore",
+    "/Makefile",
+]
 
 [lib]
 name = "xiangting"
