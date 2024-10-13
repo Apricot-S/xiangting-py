@@ -2,6 +2,16 @@
 name = "xiangting-py"
 version = "1.0.0"
 edition = "2021"
+exclude = [
+    "/.devcontainer/**/*",
+    "/.github/**/*",
+    "/docs/**/*",
+    "/examples/**/*",
+    "/scripts/**/*",
+    "/tests/**/*",
+    "/.gitignore",
+    "/Makefile",
+]
 
 [lib]
 name = "xiangting"
