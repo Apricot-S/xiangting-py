@@ -24,21 +24,36 @@ classifiers = [
 [project.urls]
 Repository = "https://github.com/Apricot-S/xiangting-py"
 
-[tool.maturin]
-features = ["pyo3/extension-module"]
-
-[tool.uv]
-dev-dependencies = [
-    "mypy>=1.11.2,<2",
+[dependency-groups]
+dev = [
+    { include-group = "lint" },
+    { include-group = "test" },
+    { include-group = "docs" },
+    { include-group = "typing" },
+    { include-group = "build" },
+]
+lint = [
     "ruff>=0.6.8,<0.7",
+]
+test = [
     "pytest>=8.3.3,<9",
-    "maturin>=1.7.1",
     "pytest-benchmark>=4.0.0",
     "mahjong>=1.2.1",
+]
+docs = [
     "sphinx>=7.4.7,<8",
     "sphinx-rtd-theme>=2.0.0",
     "scanpydoc[typehints]>=0.14.1",
 ]
+typing = [
+    "mypy>=1.11.2,<2",
+]
+build = [
+    "maturin>=1.7.1",
+]
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
