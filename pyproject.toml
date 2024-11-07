@@ -37,7 +37,7 @@ lint = [
 ]
 test = [
     "pytest>=8.3.3,<9",
-    "pytest-benchmark>=4.0.0",
+    "pytest-benchmark>=5.1.0,<6",
     "mahjong>=1.2.1",
 ]
 docs = [
