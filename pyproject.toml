@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "xiangting"
-version = "1.0.1"
+version = "2.0.0"
 description = "Python bindings for xiangting"
 authors = [{ name = "Apricot S." }]
 license = { text = "MIT License" }
@@ -19,26 +19,42 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 
 [project.urls]
 Repository = "https://github.com/Apricot-S/xiangting-py"
 
-[tool.maturin]
-features = ["pyo3/extension-module"]
-
-[tool.uv]
-dev-dependencies = [
-    "mypy>=1.11.2,<2",
-    "ruff>=0.6.8,<0.7",
+[dependency-groups]
+dev = [
+    { include-group = "lint" },
+    { include-group = "test" },
+    { include-group = "docs" },
+    { include-group = "typing" },
+    { include-group = "build" },
+]
+lint = [
+    "ruff>=0.7.1,<0.8",
+]
+test = [
     "pytest>=8.3.3,<9",
-    "maturin>=1.7.1",
-    "pytest-benchmark>=4.0.0",
+    "pytest-benchmark>=5.1.0,<6",
     "mahjong>=1.2.1",
-    "sphinx>=7.4.7,<8",
-    "sphinx-rtd-theme>=2.0.0",
+]
+docs = [
+    "sphinx>=8.1.3,<9",
+    "sphinx-rtd-theme>=3.0.1,<4",
     "scanpydoc[typehints]>=0.14.1",
 ]
+typing = [
+    "mypy>=1.13.0,<2",
+]
+build = [
+    "maturin>=1.7.1",
+]
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
