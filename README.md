@@ -33,7 +33,8 @@ xiangting-py$ pip install .
 
 ## Usage
 
-The hand is represented by the number of each tile in an array of `list[int]`. The correspondence between the index and the tile is shown in the table below.
+The hand is represented as an array of `list[int]`, where each element represents the count of a specific tile.
+The correspondence between the index and the tile is shown in the table below.
 
 | Index | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   |
 | ----- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -68,11 +69,12 @@ replacement_number = calculate_replacement_number(hand_14, None)
 assert replacement_number == 0
 ```
 
-In the calculation for a hand with melds (副露), the meld tiles can be included or excluded in the counting of the tiles that exist in four copies within the hand.
+In the calculation for a hand with melds (副露),
+the melded tiles can be included or excluded when counting tiles to determine if a hand contains four identical ones.
 
-If they are excluded (e.g., 天鳳 (Tenhou), 雀魂 (Mahjong Soul)), `None` should be specified for `fulu_mianzi_list`.
+If melds are excluded (e.g., 天鳳 (Tenhou), 雀魂 (Mahjong Soul)), specify `None` for `fulu_mianzi_list`.
 
-If they are included (e.g., World Riichi Championship, M.LEAGUE), the melds should be specified for `fulu_mianzi_list`.
+If melds are included (e.g., World Riichi Championship, M.LEAGUE), the melds should be included in the `fulu_mianzi_list`.
 
 ```python
 from xiangting import (
@@ -104,7 +106,8 @@ replacement_number_w_melds = calculate_replacement_number(hand_4, melds)
 assert replacement_number_w_melds == 2
 ```
 
-In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) do not exist. Additionally, melded sequences (明順子) cannot be used.
+In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) are not used.
+Additionally, melded sequences (明順子) are not allowed.
 
 ```python
 from xiangting import (
