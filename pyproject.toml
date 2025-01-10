@@ -10,7 +10,7 @@ authors = [{ name = "Apricot S." }]
 license = { text = "MIT License" }
 readme = "README.md"
 requires-python = ">=3.12"
-keywords = ["mahjong"]
+keywords = ["mahjong", "shanten", "xiangting"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
