@@ -15,9 +15,9 @@ use pyo3::prelude::*;
 /// See also `xiangting <https://crates.io/crates/xiangting>`_ for
 /// more information.
 ///
-/// The hand is represented by the number of each tile in an array of
-/// ``list[int]``. The correspondence between the index and the tile is
-/// shown in the table below.
+/// The hand is represented as an array of ``list[int]``, where each
+/// element represents the count of a specific tile. The correspondence
+/// between the index and the tile is shown in the table below.
 ///
 /// +-------+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 /// | Index | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   |
