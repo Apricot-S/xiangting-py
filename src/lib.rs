@@ -10,9 +10,9 @@ use crate::calculate::{calculate_replacement_number, calculate_replacement_numbe
 use crate::fulu_mianzi::{ClaimedTilePosition, FuluMianzi};
 use pyo3::prelude::*;
 
-/// Python bindings for `xiangting <https://github.com/Apricot-S/xiangting>`_.
+/// Python bindings for `xiangting <https://crates.io/crates/xiangting>`_.
 ///
-/// See also `xiangting <https://github.com/Apricot-S/xiangting>`_ for
+/// See also `xiangting <https://crates.io/crates/xiangting>`_ for
 /// more information.
 ///
 /// The hand is represented by the number of each tile in an array of

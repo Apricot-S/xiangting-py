@@ -1,8 +1,8 @@
 # xiangting-py
 
-Python bindings for [xiangting](https://github.com/Apricot-S/xiangting).
+Python bindings for [xiangting](https://crates.io/crates/xiangting).
 
-See also [xiangting](https://github.com/Apricot-S/xiangting) for more information.
+See also [xiangting](https://crates.io/crates/xiangting) for more information.
 
 Documentation:
 
