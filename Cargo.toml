@@ -26,4 +26,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = { version = "0.23.3", features = ["extension-module"] }
-xiangting = { git = "https://github.com/Apricot-S/xiangting.git", version = "2.0.3" }
+xiangting = "2.0.4"
