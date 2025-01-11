@@ -1,8 +1,8 @@
 # xiangting-py
 
-Python bindings for [xiangting](https://github.com/Apricot-S/xiangting).
+Python bindings for [xiangting](https://crates.io/crates/xiangting).
 
-See also [xiangting](https://github.com/Apricot-S/xiangting) for more information.
+See also [xiangting](https://crates.io/crates/xiangting) for more information.
 
 Documentation:
 
@@ -10,9 +10,15 @@ Documentation:
 
 ## Installation
 
-There are two options to install this library:
+There are 3 options to install this library:
 
-### Option 1: Install from wheel
+### Option 1: Install from PyPI
+
+```sh
+pip install xiangting
+```
+
+### Option 2: Install from wheel
 
 1. Download the wheel file for your platform from the [releases page](https://github.com/Apricot-S/xiangting-py/releases/latest).
 2. Run the following command:
@@ -23,7 +29,7 @@ pip install PATH/TO/xiangting-{version}-{python tag}-{abitag}-{platform tag}.whl
 
 Replace `PATH/TO/xiangting-{version}-{python tag}-{abitag}-{platform tag}.whl` with the actual path to the wheel file on your system.
 
-### Option 2: Build from source
+### Option 3: Build from source
 
 Requires `cargo`:
 
@@ -33,7 +39,8 @@ xiangting-py$ pip install .
 
 ## Usage
 
-The hand is represented by the number of each tile in an array of `list[int]`. The correspondence between the index and the tile is shown in the table below.
+The hand is represented as an array of `list[int]`, where each element represents the count of a specific tile.
+The correspondence between the index and the tile is shown in the table below.
 
 | Index | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   |
 | ----- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -68,11 +75,12 @@ replacement_number = calculate_replacement_number(hand_14, None)
 assert replacement_number == 0
 ```
 
-In the calculation for a hand with melds (副露), the meld tiles can be included or excluded in the counting of the tiles that exist in four copies within the hand.
+In the calculation for a hand with melds (副露),
+the melded tiles can be included or excluded when counting tiles to determine if a hand contains four identical ones.
 
-If they are excluded (e.g., 天鳳 (Tenhou), 雀魂 (Mahjong Soul)), `None` should be specified for `fulu_mianzi_list`.
+If melds are excluded (e.g., 天鳳 (Tenhou), 雀魂 (Mahjong Soul)), specify `None` for `fulu_mianzi_list`.
 
-If they are included (e.g., World Riichi Championship, M.LEAGUE), the melds should be specified for `fulu_mianzi_list`.
+If melds are included (e.g., World Riichi Championship, M.LEAGUE), the melds should be included in the `fulu_mianzi_list`.
 
 ```python
 from xiangting import (
@@ -104,7 +112,8 @@ replacement_number_w_melds = calculate_replacement_number(hand_4, melds)
 assert replacement_number_w_melds == 2
 ```
 
-In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) do not exist. Additionally, melded sequences (明順子) cannot be used.
+In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) are not used.
+Additionally, melded sequences (明順子) are not allowed.
 
 ```python
 from xiangting import (

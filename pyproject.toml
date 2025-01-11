@@ -1,18 +1,19 @@
 [build-system]
-requires = ["maturin>=1.7,<2.0"]
+requires = ["maturin>=1.8,<2.0"]
 build-backend = "maturin"
 
 [project]
 name = "xiangting"
-version = "2.0.3"
+version = "2.0.4"
 description = "Python bindings for xiangting"
 authors = [{ name = "Apricot S." }]
 license = { text = "MIT License" }
 readme = "README.md"
 requires-python = ">=3.12"
-keywords = ["mahjong"]
+keywords = ["mahjong", "shanten", "xiangting"]
 classifiers = [
-    "Private :: Do Not Upload",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
@@ -20,6 +21,7 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Topic :: Games/Entertainment :: Board Games",
 ]
 
 [project.urls]
@@ -34,23 +36,23 @@ dev = [
     { include-group = "build" },
 ]
 lint = [
-    "ruff>=0.8.4,<0.9",
+    "ruff>=0.9.0,<0.10",
 ]
 test = [
-    "pytest>=8.3.3,<9",
+    "pytest>=8.3.4,<9",
     "pytest-benchmark>=5.1.0,<6",
     "mahjong>=1.2.1",
 ]
 docs = [
     "sphinx>=8.1.3,<9",
-    "sphinx-rtd-theme>=3.0.1,<4",
+    "sphinx-rtd-theme>=3.0.2,<4",
     "scanpydoc[typehints]>=0.14.1",
 ]
 typing = [
-    "mypy>=1.13.0,<2",
+    "mypy>=1.14.1,<2",
 ]
 build = [
-    "maturin>=1.7.8",
+    "maturin>=1.8.1,<2",
 ]
 
 [tool.maturin]
