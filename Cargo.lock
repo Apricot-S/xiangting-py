@@ -173,9 +173,9 @@ dependencies = [
 
 [[package]]
 name = "unicode-ident"
-version = "1.0.14"
+version = "1.0.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "adb9e6ca4f869e1180728b7950e35922a7fc6397f7b641499e8f3ef06e50dc83"
+checksum = "a210d160f08b701c8721ba1c726c11662f877ea6b7094007e1ca9a1041945034"
 
 [[package]]
 name = "unindent"
@@ -185,16 +185,16 @@ checksum = "c7de7d73e1754487cb58364ee906a499937a0dfabd86bcb980fa99ec8c8fa2ce"
 
 [[package]]
 name = "xiangting"
-version = "2.0.6"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "43263067366eae3c089c8b6ec5fbb7d4019fa541a73ade226cd304b8f06dfa00"
+checksum = "fb4fa2c00dc7674fd77b97489c2d4dc31cb202de99cf3a8c5bcf60e5fc72e969"
 dependencies = [
  "thiserror",
 ]
 
 [[package]]
 name = "xiangting-py"
-version = "2.0.6"
+version = "3.0.0"
 dependencies = [
  "pyo3",
  "xiangting",
