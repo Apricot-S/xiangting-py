@@ -33,10 +33,9 @@ def generate_random_pure_hand(rng: Random) -> list[int]:
 
 def generate_random_half_flush_pure_hand(rng: Random) -> list[int]:
     color_start = rng.choice([0, 9, 18])
-    wall = [
-        (i // 4 + color_start) if i < 36 else ((i - 36) // 4 + 27)  # noqa: PLR2004
-        for i in range(64)
-    ]
+    suits = [(i // 4 + color_start) for i in range(36)]
+    honors = [(i // 4 + 27) for i in range(28)]
+    wall = suits + honors
     rng.shuffle(wall)
     hand_length = choose_hand_length(rng)
     return fill_hand(wall, hand_length)
