@@ -25,5 +25,5 @@ name = "xiangting"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.23.4", features = ["extension-module"] }
+pyo3 = { version = "0.24.1", features = ["extension-module"] }
 xiangting = "3.1.1"
