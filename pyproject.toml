@@ -36,10 +36,10 @@ dev = [
     { include-group = "build" },
 ]
 lint = [
-    "ruff>=0.9.4,<0.10",
+    "ruff>=0.11.6,<0.12",
 ]
 test = [
-    "pytest>=8.3.4,<9",
+    "pytest>=8.3.5,<9",
     "pytest-benchmark>=5.1.0,<6",
     "mahjong>=1.2.1",
 ]
@@ -49,7 +49,7 @@ docs = [
     "scanpydoc[typehints]>=0.15.2",
 ]
 typing = [
-    "mypy>=1.14.1,<2",
+    "mypy>=1.15.0,<2",
 ]
 build = [
     "maturin>=1.8.1,<2",
