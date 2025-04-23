@@ -7,7 +7,7 @@ name = "xiangting"
 version = "3.1.2"
 description = "Python bindings for xiangting"
 authors = [{ name = "Apricot S." }]
-license = { text = "MIT License" }
+license = "MIT"
 readme = "README.md"
 requires-python = ">=3.12"
 keywords = ["mahjong", "shanten", "xiangting"]
