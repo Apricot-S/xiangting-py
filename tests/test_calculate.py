@@ -104,6 +104,86 @@ def test_calculate_replacement_number_invalid_meld() -> None:
         calculate_replacement_number(bingpai, fulu_mianzi_list)
 
 
+# Source: https://zenn.dev/tomohxx/articles/aecace4e3a3bc1
+
+
+def test_calculate_replacement_number_lack_isolated_tile_13_4333() -> None:
+    bingpai = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # m
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+        4, 3, 3, 3, 0, 0, 0, # z
+    ]  # fmt: skip
+    replacement_number = calculate_replacement_number(bingpai, None)
+    assert replacement_number == 2  # noqa: PLR2004
+
+
+def test_calculate_replacement_number_lack_isolated_tile_13_4432i() -> None:
+    bingpai = [
+        2, 0, 0, 0, 0, 0, 0, 0, 0, # m
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+        4, 4, 3, 0, 0, 0, 0, # z
+    ]  # fmt: skip
+    replacement_number = calculate_replacement_number(bingpai, None)
+    assert replacement_number == 3  # noqa: PLR2004
+
+
+def test_calculate_replacement_number_lack_isolated_tile_13_4432ii() -> None:
+    bingpai = [
+        0, 1, 1, 0, 0, 0, 0, 0, 0, # m
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+        4, 4, 3, 0, 0, 0, 0, # z
+    ]  # fmt: skip
+    replacement_number = calculate_replacement_number(bingpai, None)
+    assert replacement_number == 3  # noqa: PLR2004
+
+
+def test_calculate_replacement_number_lack_isolated_tile_13_4441() -> None:
+    bingpai = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # m
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+        4, 4, 4, 1, 0, 0, 0, # z
+    ]  # fmt: skip
+    replacement_number = calculate_replacement_number(bingpai, None)
+    assert replacement_number == 4  # noqa: PLR2004
+
+
+def test_calculate_replacement_number_lack_isolated_tile_14_4433() -> None:
+    bingpai = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # m
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+        4, 4, 3, 3, 0, 0, 0, # z
+    ]  # fmt: skip
+    replacement_number = calculate_replacement_number(bingpai, None)
+    assert replacement_number == 2  # noqa: PLR2004
+
+
+def test_calculate_replacement_number_lack_isolated_tile_14_4442i() -> None:
+    bingpai = [
+        2, 0, 0, 0, 0, 0, 0, 0, 0, # m
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+        4, 4, 4, 0, 0, 0, 0, # z
+    ]  # fmt: skip
+    replacement_number = calculate_replacement_number(bingpai, None)
+    assert replacement_number == 3  # noqa: PLR2004
+
+
+def test_calculate_replacement_number_lack_isolated_tile_14_4442ii() -> None:
+    bingpai = [
+        0, 1, 1, 0, 0, 0, 0, 0, 0, # m
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+        0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+        4, 4, 4, 0, 0, 0, 0, # z
+    ]  # fmt: skip
+    replacement_number = calculate_replacement_number(bingpai, None)
+    assert replacement_number == 3  # noqa: PLR2004
+
+
 def test_calculate_replacement_number_3_player_standard_tenpai() -> None:
     bingpai = [
         3, 0, 0, 0, 0, 0, 0, 0, 0, # m

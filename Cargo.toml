@@ -1,6 +1,6 @@
 [package]
 name = "xiangting-py"
-version = "3.1.2"
+version = "3.1.3"
 description = "Python bindings for xiangting"
 authors = ["Apricot S."]
 edition = "2021"
@@ -26,4 +26,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = { version = "0.24.1", features = ["extension-module"] }
-xiangting = "3.1.2"
+xiangting = "3.1.3"
