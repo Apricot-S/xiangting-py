@@ -41,7 +41,7 @@ lint = [
 test = [
     "pytest>=8.3.5,<9",
     "pytest-benchmark>=5.1.0,<6",
-    "mahjong>=1.2.1",
+    "mahjong>=1.3.0",
 ]
 docs = [
     "sphinx>=8.1.3,<9",
@@ -52,7 +52,7 @@ typing = [
     "mypy>=1.15.0,<2",
 ]
 build = [
-    "maturin>=1.8.1,<2",
+    "maturin>=1.8.6,<2",
 ]
 
 [tool.maturin]
@@ -110,5 +110,5 @@ convention = "google"
 exclude = ["^docs/.*\\.py$"]
 
 [[tool.mypy.overrides]]
-module = ["pytest_benchmark.*", "mahjong.*"]
+module = ["pytest_benchmark.*"]
 ignore_missing_imports = true
