@@ -1,5 +1,8 @@
 # xiangting-py
 
+[![PyPI](https://img.shields.io/pypi/v/xiangting.svg)](https://pypi.org/project/xiangting)
+[![API](https://img.shields.io/badge/api-main-yellow.svg)](https://apricot-s.github.io/xiangting-py)
+
 Python bindings for [xiangting](https://crates.io/crates/xiangting).
 
 See also [xiangting](https://crates.io/crates/xiangting) for more information.
