@@ -27,4 +27,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = { version = "0.26.0", features = ["extension-module"] }
-xiangting = "3.2.1"
+xiangting = "4.0.0"
