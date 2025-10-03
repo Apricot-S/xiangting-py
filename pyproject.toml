@@ -11,7 +11,7 @@ license = "MIT"
 license-files = ["LICENSE", "THIRD-PARTY-NOTICES.md"]
 readme = "README.md"
 requires-python = ">=3.12"
-keywords = ["mahjong", "shanten", "xiangting"]
+keywords = ["mahjong", "riichi", "shanten", "xiangting"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
