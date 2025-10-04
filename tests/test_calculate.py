@@ -18,14 +18,14 @@ def test_calculate_replacement_number_standard_tenpai() -> None:
     assert replacement_number == 1
 
 
-def test_calculate_replacement_number_shisanyao_tenpai() -> None:
-    bingpai = TilesConverter.one_line_string_to_34_array("19m19p19s1234567z")
+def test_calculate_replacement_number_qiduizi_tenpai() -> None:
+    bingpai = TilesConverter.one_line_string_to_34_array("1188m288p55s1177z")
     replacement_number = calculate_replacement_number(bingpai, None)
     assert replacement_number == 1
 
 
-def test_calculate_replacement_number_qiduizi_tenpai() -> None:
-    bingpai = TilesConverter.one_line_string_to_34_array("1188m288p55s1177z")
+def test_calculate_replacement_number_shisanyao_tenpai() -> None:
+    bingpai = TilesConverter.one_line_string_to_34_array("19m19p19s1234567z")
     replacement_number = calculate_replacement_number(bingpai, None)
     assert replacement_number == 1
 
@@ -94,14 +94,14 @@ def test_calculate_replacement_number_3_player_standard_tenpai() -> None:
     assert replacement_number == 1
 
 
-def test_calculate_replacement_number_3_player_shisanyao_tenpai() -> None:
-    bingpai = TilesConverter.one_line_string_to_34_array("19m19p19s1234567z")
+def test_calculate_replacement_number_3_player_qiduizi_tenpai() -> None:
+    bingpai = TilesConverter.one_line_string_to_34_array("1199m288p55s1177z")
     replacement_number = calculate_replacement_number_3_player(bingpai, None)
     assert replacement_number == 1
 
 
-def test_calculate_replacement_number_3_player_qiduizi_tenpai() -> None:
-    bingpai = TilesConverter.one_line_string_to_34_array("1199m288p55s1177z")
+def test_calculate_replacement_number_3_player_shisanyao_tenpai() -> None:
+    bingpai = TilesConverter.one_line_string_to_34_array("19m19p19s1234567z")
     replacement_number = calculate_replacement_number_3_player(bingpai, None)
     assert replacement_number == 1
 
