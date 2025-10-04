@@ -9,7 +9,7 @@
 project = "xiangting"
 copyright = "2024, Apricot S."
 author = "Apricot S."
-release = "3.2.1"
+release = "4.0.0"
 version = release
 
 

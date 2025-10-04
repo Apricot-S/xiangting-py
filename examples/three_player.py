@@ -8,15 +8,15 @@ from xiangting import (
 )
 
 # 1111m111122233z
-hand_13 = [
+hand = [
     4, 0, 0, 0, 0, 0, 0, 0, 0, # m
     0, 0, 0, 0, 0, 0, 0, 0, 0, # p
     0, 0, 0, 0, 0, 0, 0, 0, 0, # s
     4, 3, 2, 0, 0, 0, 0, # z
 ]  # fmt: skip
 
-replacement_number_4p = calculate_replacement_number(hand_13, None)
+replacement_number_4p = calculate_replacement_number(hand, None)
 assert replacement_number_4p == 2
 
-replacement_number_3p = calculate_replacement_number_3_player(hand_13, None)
+replacement_number_3p = calculate_replacement_number_3_player(hand, None)
 assert replacement_number_3p == 3

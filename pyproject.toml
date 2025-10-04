@@ -1,17 +1,17 @@
 [build-system]
-requires = ["maturin>=1.8,<2.0"]
+requires = ["maturin>=1.9,<2.0"]
 build-backend = "maturin"
 
 [project]
 name = "xiangting"
-version = "3.2.1"
+version = "4.0.0"
 description = "Python bindings for xiangting"
 authors = [{ name = "Apricot S." }]
 license = "MIT"
 license-files = ["LICENSE", "THIRD-PARTY-NOTICES.md"]
 readme = "README.md"
 requires-python = ">=3.12"
-keywords = ["mahjong", "shanten", "xiangting"]
+keywords = ["mahjong", "riichi", "shanten", "xiangting"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -36,23 +36,23 @@ dev = [
     { include-group = "build" },
 ]
 lint = [
-    "ruff>=0.11.6,<0.12",
+    "ruff>=0.13.3,<0.14",
 ]
 test = [
-    "pytest>=8.3.5,<9",
+    "pytest>=8.4.2,<9",
     "pytest-benchmark>=5.1.0,<6",
     "mahjong>=1.3.0",
 ]
 docs = [
-    "sphinx>=8.1.3,<9",
+    "sphinx>=8.2.3,<9",
     "sphinx-rtd-theme>=3.0.2,<4",
-    "scanpydoc[typehints]>=0.15.2",
+    "scanpydoc[typehints]>=0.15.4",
 ]
 typing = [
-    "mypy>=1.15.0,<2",
+    "mypy>=1.18.2,<2",
 ]
 build = [
-    "maturin>=1.8.6,<2",
+    "maturin>=1.9.4,<2",
 ]
 
 [tool.maturin]
@@ -103,7 +103,8 @@ convention = "google"
     "PLR2004", # magic-value-comparison
 ]
 "./tests/*" = [
-    "S101", # assert
+    "S101",    # assert
+    "PLR2004", # magic-value-comparison
 ]
 
 [tool.mypy]
