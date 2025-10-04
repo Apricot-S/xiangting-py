@@ -45,13 +45,13 @@ use pyo3::prelude::*;
 ///
 /// Example:
 ///     >>> # 123m456p789s11222z
-///     >>> hand_14 = [
+///     >>> hand = [
 ///     ...     1, 1, 1, 0, 0, 0, 0, 0, 0, # m
 ///     ...     0, 0, 0, 1, 1, 1, 0, 0, 0, # p
 ///     ...     0, 0, 0, 0, 0, 0, 1, 1, 1, # s
 ///     ...     2, 3, 0, 0, 0, 0, 0, # z
 ///     ... ]
-///     >>> r = calculate_replacement_number(hand_14, None)
+///     >>> r = calculate_replacement_number(hand, None)
 ///     >>> print(r)
 ///     0
 ///

@@ -5,12 +5,12 @@
 from xiangting import calculate_replacement_number
 
 # 123m456p789s11222z
-hand_14 = [
+hand = [
     1, 1, 1, 0, 0, 0, 0, 0, 0, # m
     0, 0, 0, 1, 1, 1, 0, 0, 0, # p
     0, 0, 0, 0, 0, 0, 1, 1, 1, # s
     2, 3, 0, 0, 0, 0, 0, # z
 ]  # fmt: skip
 
-replacement_number = calculate_replacement_number(hand_14, None)
+replacement_number = calculate_replacement_number(hand, None)
 assert replacement_number == 0
