@@ -103,7 +103,8 @@ convention = "google"
     "PLR2004", # magic-value-comparison
 ]
 "./tests/*" = [
-    "S101", # assert
+    "S101",    # assert
+    "PLR2004", # magic-value-comparison
 ]
 
 [tool.mypy]

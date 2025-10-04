@@ -69,43 +69,43 @@ def test_calculate_replacement_number_invalid_meld() -> None:
 def test_calculate_replacement_number_lack_isolated_tile_13_4333() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("1111222333444z")
     replacement_number = calculate_replacement_number(bingpai, None)
-    assert replacement_number == 2  # noqa: PLR2004
+    assert replacement_number == 2
 
 
 def test_calculate_replacement_number_lack_isolated_tile_13_4432i() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("11m11112222333z")
     replacement_number = calculate_replacement_number(bingpai, None)
-    assert replacement_number == 3  # noqa: PLR2004
+    assert replacement_number == 3
 
 
 def test_calculate_replacement_number_lack_isolated_tile_13_4432ii() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("23m11112222333z")
     replacement_number = calculate_replacement_number(bingpai, None)
-    assert replacement_number == 3  # noqa: PLR2004
+    assert replacement_number == 3
 
 
 def test_calculate_replacement_number_lack_isolated_tile_13_4441() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("1111222233334z")
     replacement_number = calculate_replacement_number(bingpai, None)
-    assert replacement_number == 4  # noqa: PLR2004
+    assert replacement_number == 4
 
 
 def test_calculate_replacement_number_lack_isolated_tile_14_4433() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("11112222333444z")
     replacement_number = calculate_replacement_number(bingpai, None)
-    assert replacement_number == 2  # noqa: PLR2004
+    assert replacement_number == 2
 
 
 def test_calculate_replacement_number_lack_isolated_tile_14_4442i() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("11m111122223333z")
     replacement_number = calculate_replacement_number(bingpai, None)
-    assert replacement_number == 3  # noqa: PLR2004
+    assert replacement_number == 3
 
 
 def test_calculate_replacement_number_lack_isolated_tile_14_4442ii() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("23m111122223333z")
     replacement_number = calculate_replacement_number(bingpai, None)
-    assert replacement_number == 3  # noqa: PLR2004
+    assert replacement_number == 3
 
 
 def test_calculate_replacement_number_3_player_standard_tenpai() -> None:
