@@ -5,16 +5,16 @@
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 
-pub(crate) struct InvalidShoupaiError(::xiangting::InvalidShoupaiError);
+pub(crate) struct XiangtingError(::xiangting::XiangtingError);
 
-impl From<self::InvalidShoupaiError> for PyErr {
-    fn from(err: self::InvalidShoupaiError) -> PyErr {
+impl From<self::XiangtingError> for PyErr {
+    fn from(err: self::XiangtingError) -> PyErr {
         PyValueError::new_err(err.0.to_string())
     }
 }
 
-impl From<::xiangting::InvalidShoupaiError> for self::InvalidShoupaiError {
-    fn from(err: ::xiangting::InvalidShoupaiError) -> self::InvalidShoupaiError {
-        self::InvalidShoupaiError(err)
+impl From<::xiangting::XiangtingError> for self::XiangtingError {
+    fn from(err: ::xiangting::XiangtingError) -> self::XiangtingError {
+        self::XiangtingError(err)
     }
 }

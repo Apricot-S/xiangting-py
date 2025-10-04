@@ -3,11 +3,10 @@
 // This file is part of https://github.com/Apricot-S/xiangting-py
 
 use crate::fulu_mianzi::FuluMianzi;
-use crate::shoupai::InvalidShoupaiError;
+use crate::shoupai::XiangtingError;
 use ::xiangting::Bingpai;
 use pyo3::prelude::*;
-
-type FuluMianziList = [Option<self::FuluMianzi>; 4];
+use pyo3::types::PySequence;
 
 /// Calculates the replacement number (= xiangting number + 1) for a given hand.
 ///
@@ -79,12 +78,15 @@ type FuluMianziList = [Option<self::FuluMianzi>; 4];
 #[pyo3(signature = (bingpai, fulu_mianzi_list))]
 pub(crate) fn calculate_replacement_number(
     bingpai: Bingpai,
-    fulu_mianzi_list: Option<self::FuluMianziList>,
+    fulu_mianzi_list: Option<Bound<'_, PySequence>>,
 ) -> PyResult<u8> {
-    let f = fulu_mianzi_list.map(|list| list.map(|opt| opt.map(|val| val.into())));
+    let fl: Option<Vec<::xiangting::FuluMianzi>> = fulu_mianzi_list
+        .map(|s| s.extract::<Vec<self::FuluMianzi>>())
+        .transpose()?
+        .map(|v| v.into_iter().map(Into::into).collect());
 
-    ::xiangting::calculate_replacement_number(&bingpai, &f)
-        .map_err(self::InvalidShoupaiError::from)
+    ::xiangting::calculate_replacement_number(&bingpai, fl.as_deref())
+        .map_err(self::XiangtingError::from)
         .map_err(PyErr::from)
 }
 
@@ -160,11 +162,14 @@ pub(crate) fn calculate_replacement_number(
 #[pyo3(signature = (bingpai, fulu_mianzi_list))]
 pub(crate) fn calculate_replacement_number_3_player(
     bingpai: Bingpai,
-    fulu_mianzi_list: Option<self::FuluMianziList>,
+    fulu_mianzi_list: Option<Bound<'_, PySequence>>,
 ) -> PyResult<u8> {
-    let f = fulu_mianzi_list.map(|list| list.map(|opt| opt.map(|val| val.into())));
+    let fl: Option<Vec<::xiangting::FuluMianzi>> = fulu_mianzi_list
+        .map(|s| s.extract::<Vec<self::FuluMianzi>>())
+        .transpose()?
+        .map(|v| v.into_iter().map(Into::into).collect());
 
-    ::xiangting::calculate_replacement_number_3_player(&bingpai, &f)
-        .map_err(self::InvalidShoupaiError::from)
+    ::xiangting::calculate_replacement_number_3_player(&bingpai, fl.as_deref())
+        .map_err(self::XiangtingError::from)
         .map_err(PyErr::from)
 }

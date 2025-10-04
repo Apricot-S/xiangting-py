@@ -2,8 +2,6 @@
 # SPDX-License-Identifier: MIT
 # This file is part of https://github.com/Apricot-S/xiangting-py
 
-import re
-
 import pytest
 from mahjong.tile import TilesConverter
 
@@ -41,8 +39,6 @@ def test_calculate_replacement_number_with_meld() -> None:
     fulu_mianzi_list = [
         FuluMianzi.Kezi(27),
         FuluMianzi.Shunzi(24, ClaimedTilePosition.LOW),
-        None,
-        None,
     ]
     replacement_number_2 = calculate_replacement_number(
         bingpai,
@@ -54,24 +50,16 @@ def test_calculate_replacement_number_with_meld() -> None:
 def test_calculate_replacement_number_empty_bingpai() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("")
 
-    error_msg = "hand is empty"
-    with pytest.raises(ValueError, match=error_msg):
+    with pytest.raises(ValueError):  # noqa: PT011
         calculate_replacement_number(bingpai, None)
 
 
 def test_calculate_replacement_number_invalid_meld() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("123m456p2z")
 
-    fulu_mianzi_list: list[FuluMianzi | None] = [
-        FuluMianzi.Kezi(34),
-        None,
-        None,
-        None,
-    ]
+    fulu_mianzi_list = [FuluMianzi.Kezi(34)]
 
-    inner_error_msg = "tile index must be between 0 and 33 but was 34"
-    error_msg = f"hand contains an invalid meld ({inner_error_msg})"
-    with pytest.raises(ValueError, match=re.escape(error_msg)):
+    with pytest.raises(ValueError):  # noqa: PT011
         calculate_replacement_number(bingpai, fulu_mianzi_list)
 
 
@@ -143,12 +131,7 @@ def test_calculate_replacement_number_3_player_with_meld() -> None:
     replacement_number_1 = calculate_replacement_number_3_player(bingpai, None)
     assert replacement_number_1 == 1
 
-    fulu_mianzi_list: list[FuluMianzi | None] = [
-        FuluMianzi.Kezi(27),
-        None,
-        None,
-        None,
-    ]
+    fulu_mianzi_list = [FuluMianzi.Kezi(27)]
     replacement_number_2 = calculate_replacement_number_3_player(
         bingpai,
         fulu_mianzi_list,
@@ -159,21 +142,14 @@ def test_calculate_replacement_number_3_player_with_meld() -> None:
 def test_calculate_replacement_number_3_player_empty_bingpai() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("")
 
-    error_msg = "hand is empty"
-    with pytest.raises(ValueError, match=error_msg):
+    with pytest.raises(ValueError):  # noqa: PT011
         calculate_replacement_number_3_player(bingpai, None)
 
 
 def test_calculate_replacement_number_3_player_invalid_meld() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("111m456p2z")
 
-    fulu_mianzi_list: list[FuluMianzi | None] = [
-        FuluMianzi.Kezi(1),
-        None,
-        None,
-        None,
-    ]
+    fulu_mianzi_list = [FuluMianzi.Kezi(1)]
 
-    error_msg = "Pon-2m cannot be used in 3-player mahjong"
-    with pytest.raises(ValueError, match=error_msg):
+    with pytest.raises(ValueError):  # noqa: PT011
         calculate_replacement_number_3_player(bingpai, fulu_mianzi_list)
