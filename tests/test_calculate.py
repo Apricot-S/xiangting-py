@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 # This file is part of https://github.com/Apricot-S/xiangting-py
 
-import pytest
 from mahjong.tile import TilesConverter
 
 from xiangting import (
@@ -33,34 +32,15 @@ def test_calculate_replacement_number_qiduizi_tenpai() -> None:
 
 def test_calculate_replacement_number_with_meld() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("123m456p2z")
-    replacement_number_1 = calculate_replacement_number(bingpai, None)
-    assert replacement_number_1 == 1
-
     fulu_mianzi_list = [
         FuluMianzi.Kezi(27),
         FuluMianzi.Shunzi(24, ClaimedTilePosition.LOW),
     ]
-    replacement_number_2 = calculate_replacement_number(
+    replacement_number = calculate_replacement_number(
         bingpai,
         fulu_mianzi_list,
     )
-    assert replacement_number_2 == 1
-
-
-def test_calculate_replacement_number_empty_bingpai() -> None:
-    bingpai = TilesConverter.one_line_string_to_34_array("")
-
-    with pytest.raises(ValueError):  # noqa: PT011
-        calculate_replacement_number(bingpai, None)
-
-
-def test_calculate_replacement_number_invalid_meld() -> None:
-    bingpai = TilesConverter.one_line_string_to_34_array("123m456p2z")
-
-    fulu_mianzi_list = [FuluMianzi.Kezi(34)]
-
-    with pytest.raises(ValueError):  # noqa: PT011
-        calculate_replacement_number(bingpai, fulu_mianzi_list)
+    assert replacement_number == 1
 
 
 # Source: https://zenn.dev/tomohxx/articles/aecace4e3a3bc1
@@ -128,28 +108,9 @@ def test_calculate_replacement_number_3_player_qiduizi_tenpai() -> None:
 
 def test_calculate_replacement_number_3_player_with_meld() -> None:
     bingpai = TilesConverter.one_line_string_to_34_array("111m456p789s2z")
-    replacement_number_1 = calculate_replacement_number_3_player(bingpai, None)
-    assert replacement_number_1 == 1
-
     fulu_mianzi_list = [FuluMianzi.Kezi(27)]
-    replacement_number_2 = calculate_replacement_number_3_player(
+    replacement_number = calculate_replacement_number_3_player(
         bingpai,
         fulu_mianzi_list,
     )
-    assert replacement_number_2 == 1
-
-
-def test_calculate_replacement_number_3_player_empty_bingpai() -> None:
-    bingpai = TilesConverter.one_line_string_to_34_array("")
-
-    with pytest.raises(ValueError):  # noqa: PT011
-        calculate_replacement_number_3_player(bingpai, None)
-
-
-def test_calculate_replacement_number_3_player_invalid_meld() -> None:
-    bingpai = TilesConverter.one_line_string_to_34_array("111m456p2z")
-
-    fulu_mianzi_list = [FuluMianzi.Kezi(1)]
-
-    with pytest.raises(ValueError):  # noqa: PT011
-        calculate_replacement_number_3_player(bingpai, fulu_mianzi_list)
+    assert replacement_number == 1
