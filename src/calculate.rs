@@ -12,18 +12,27 @@ use pyo3::types::PySequence;
 ///
 /// This function is for 4-player mahjong.
 ///
-/// If the number of melds in the list is less than the required number
-/// of melds for the hand, the missing melds are calculated as melds
-/// that do not overlap with the tiles in the hand.
-/// For example, if the hand consists of 123p1s, three melds are
-/// required. If only two melds are provided, such as [444p, 777s], the
-/// missing third meld is calculated as a meld that does not overlap
-/// with the tiles in the hand, such as 111z.
+/// In some rulesets, melded tiles are excluded when checking whether
+/// a hand contains four identical tiles. In others, melded tiles are
+/// included in the calculation. This function allows you to control
+/// that behavior via the `fulu_mianzi_list` argument:
+///
+/// - Use `None` if melds are excluded in the ruleset
+///   (e.g., Tenhou, Mahjong Soul).
+/// - Provide `Sequence[FuluMianzi]` if melds are included
+///   (e.g., World Riichi Championship, M.LEAGUE).
+///
+/// If fewer melds are provided than required for a complete hand,
+/// the missing ones are treated as melds that do not overlap with
+/// the tiles in the hand.
+/// For example, with the hand 123p1s, three melds are required.
+/// If only two are given (e.g., [444p, 777s]), the third is considered
+/// to be a non-overlapping meld, such as 111z.
 ///
 /// Args:
 ///     bingpai (list[int]): A hand excluding melds
 ///         (兵牌 a.k.a. pure hand, 純手牌).
-///     fulu_mianzi_list (list[FuluMianzi | None] | None):
+///     fulu_mianzi_list (Sequence[FuluMianzi] | None):
 ///         An optional list of melds.
 ///
 /// Returns:
@@ -34,43 +43,40 @@ use pyo3::types::PySequence;
 ///
 /// Examples:
 ///     >>> # 123m456p789s11222z
-///     >>> hand_14 = [
+///     >>> hand = [
 ///     ...     1, 1, 1, 0, 0, 0, 0, 0, 0, # m
 ///     ...     0, 0, 0, 1, 1, 1, 0, 0, 0, # p
 ///     ...     0, 0, 0, 0, 0, 0, 1, 1, 1, # s
 ///     ...     2, 3, 0, 0, 0, 0, 0, # z
 ///     ... ]
-///     >>> r = calculate_replacement_number(hand_14, None)
+///     >>> r = calculate_replacement_number(hand, None)
 ///     >>> print(r)
 ///     0
-///     >>> # 123m1z (3 melds required)
-///     >>> hand_4 = [
+///     >>> # 123m1z
+///     >>> hand = [
 ///     ...     1, 1, 1, 0, 0, 0, 0, 0, 0, # m
 ///     ...     0, 0, 0, 0, 0, 0, 0, 0, 0, # p
 ///     ...     0, 0, 0, 0, 0, 0, 0, 0, 0, # s
 ///     ...     1, 0, 0, 0, 0, 0, 0, # z
 ///     ... ]
-///     >>> # 456p 7777s 111z (3 melds)
+///     >>> # 456p 7777s 111z
 ///     >>> melds_3 = [
 ///     ...     FuluMianzi.Shunzi(12, ClaimedTilePosition.LOW),
 ///     ...     FuluMianzi.Gangzi(24),
 ///     ...     FuluMianzi.Kezi(27),
-///     ...     None,
 ///     ... ]
-///     >>> r_wo_melds = calculate_replacement_number(hand_4, None)
+///     >>> r_wo_melds = calculate_replacement_number(hand, None)
 ///     >>> print(r_wo_melds)
 ///     1
-///     >>> r_w_melds = calculate_replacement_number(hand_4, melds_3)
+///     >>> r_w_melds = calculate_replacement_number(hand, melds_3)
 ///     >>> print(r_w_melds)
 ///     2
-///     >>> # 456p 7777s (2 melds)
+///     >>> # 456p 7777s
 ///     >>> melds_2 = [
 ///     ...     FuluMianzi.Shunzi(12, ClaimedTilePosition.LOW),
 ///     ...     FuluMianzi.Gangzi(24),
-///     ...     None,
-///     ...     None,
 ///     ... ]
-///     >>> r_w_missing_melds = calculate_replacement_number(hand_4, melds_2)
+///     >>> r_w_missing_melds = calculate_replacement_number(hand, melds_2)
 ///     >>> print(r_w_missing_melds)
 ///     1
 ///
@@ -93,21 +99,31 @@ pub(crate) fn calculate_replacement_number(
 /// Calculates the replacement number (= xiangting number + 1) for a given hand.
 ///
 /// This function is for 3-player mahjong.
-/// Tiles from 2m (二萬) to 8m (八萬) cannot be used.
-/// Additionally, melded sequences (明順子) cannot be used.
 ///
-/// If the number of melds in the list is less than the required number
-/// of melds for the hand, the missing melds are calculated as melds
-/// that do not overlap with the tiles in the hand.
-/// For example, if the hand consists of 123p1s, three melds are
-/// required. If only two melds are provided, such as [444p, 777s], the
-/// missing third meld is calculated as a meld that does not overlap
-/// with the tiles in the hand, such as 111z.
+/// Tiles from 2m (二萬) to 8m (八萬) are not used.
+/// In addition, melded sequences (明順子) are not allowed.
+///
+/// In some rulesets, melded tiles are excluded when checking whether
+/// a hand contains four identical tiles. In others, melded tiles are
+/// included in the calculation. This function allows you to control
+/// that behavior via the `fulu_mianzi_list` argument:
+///
+/// - Use `None` if melds are excluded in the ruleset
+///   (e.g., Tenhou, Mahjong Soul).
+/// - Provide `Sequence[FuluMianzi]` if melds are included
+///   (e.g., World Riichi Championship, M.LEAGUE).
+///
+/// If fewer melds are provided than required for a complete hand,
+/// the missing ones are treated as melds that do not overlap with
+/// the tiles in the hand.
+/// For example, with the hand 123p1s, three melds are required.
+/// If only two are given (e.g., [444p, 777s]), the third is considered
+/// to be a non-overlapping meld, such as 111z.
 ///
 /// Args:
 ///     bingpai (list[int]): A hand excluding melds.
 ///         (兵牌 a.k.a. pure hand, 純手牌).
-///     fulu_mianzi_list (list[FuluMianzi | None] | None):
+///     fulu_mianzi_list (Sequence[FuluMianzi] | None):
 ///         An optional list of melds.
 ///
 /// Returns:
@@ -118,43 +134,40 @@ pub(crate) fn calculate_replacement_number(
 ///
 /// Examples:
 ///     >>> # 111m456p789s11222z
-///     >>> hand_14 = [
+///     >>> hand = [
 ///     ...     3, 0, 0, 0, 0, 0, 0, 0, 0, # m
 ///     ...     0, 0, 0, 1, 1, 1, 0, 0, 0, # p
 ///     ...     0, 0, 0, 0, 0, 0, 1, 1, 1, # s
 ///     ...     2, 3, 0, 0, 0, 0, 0, # z
 ///     ... ]
-///     >>> r = calculate_replacement_number(hand_14, None)
+///     >>> r = calculate_replacement_number(hand, None)
 ///     >>> print(r)
 ///     0
-///     >>> # 111m1z (3 melds required)
-///     >>> hand_4 = [
+///     >>> # 111m1z
+///     >>> hand = [
 ///     ...     3, 0, 0, 0, 0, 0, 0, 0, 0, # m
 ///     ...     0, 0, 0, 0, 0, 0, 0, 0, 0, # p
 ///     ...     0, 0, 0, 0, 0, 0, 0, 0, 0, # s
 ///     ...     1, 0, 0, 0, 0, 0, 0, # z
 ///     ... ]
-///     >>> # 444p 7777s 111z (3 melds)
+///     >>> # 444p 7777s 111z
 ///     >>> melds_3 = [
 ///     ...     FuluMianzi.Kezi(12),
 ///     ...     FuluMianzi.Gangzi(24),
 ///     ...     FuluMianzi.Kezi(27),
-///     ...     None,
 ///     ... ]
-///     >>> r_wo_melds = calculate_replacement_number(hand_4, None)
+///     >>> r_wo_melds = calculate_replacement_number(hand, None)
 ///     >>> print(r_wo_melds)
 ///     1
-///     >>> r_w_melds = calculate_replacement_number(hand_4, melds_3)
+///     >>> r_w_melds = calculate_replacement_number(hand, melds_3)
 ///     >>> print(r_w_melds)
 ///     2
-///     >>> # 444p 7777s (2 melds)
+///     >>> # 444p 7777s
 ///     >>> melds_2 = [
 ///     ...     FuluMianzi.Kezi(12),
 ///     ...     FuluMianzi.Gangzi(24),
-///     ...     None,
-///     ...     None,
 ///     ... ]
-///     >>> r_w_missing_melds = calculate_replacement_number(hand_4, melds_2)
+///     >>> r_w_missing_melds = calculate_replacement_number(hand, melds_2)
 ///     >>> print(r_w_missing_melds)
 ///     1
 ///
