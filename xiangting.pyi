@@ -24,15 +24,9 @@ class FuluMianzi:
 
 def calculate_replacement_number(
     bingpai: list[int],
-    fulu_mianzi_list: list[FuluMianzi]
-    | list[FuluMianzi | None]
-    | list[None]
-    | None,
+    fulu_mianzi_list: list[FuluMianzi] | None,
 ) -> int: ...
 def calculate_replacement_number_3_player(
     bingpai: list[int],
-    fulu_mianzi_list: list[FuluMianzi]
-    | list[FuluMianzi | None]
-    | list[None]
-    | None,
+    fulu_mianzi_list: list[FuluMianzi] | None,
 ) -> int: ...
