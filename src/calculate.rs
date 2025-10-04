@@ -15,11 +15,11 @@ use pyo3::types::PySequence;
 /// In some rulesets, melded tiles are excluded when checking whether
 /// a hand contains four identical tiles. In others, melded tiles are
 /// included in the calculation. This function allows you to control
-/// that behavior via the `fulu_mianzi_list` argument:
+/// that behavior via the ``fulu_mianzi_list`` argument:
 ///
-/// - Use `None` if melds are excluded in the ruleset
+/// - Use ``None`` if melds are excluded in the ruleset
 ///   (e.g., Tenhou, Mahjong Soul).
-/// - Provide `Sequence[FuluMianzi]` if melds are included
+/// - Provide ``Sequence[FuluMianzi]`` if melds are included
 ///   (e.g., World Riichi Championship, M.LEAGUE).
 ///
 /// If fewer melds are provided than required for a complete hand,
@@ -106,11 +106,11 @@ pub(crate) fn calculate_replacement_number(
 /// In some rulesets, melded tiles are excluded when checking whether
 /// a hand contains four identical tiles. In others, melded tiles are
 /// included in the calculation. This function allows you to control
-/// that behavior via the `fulu_mianzi_list` argument:
+/// that behavior via the ``fulu_mianzi_list`` argument:
 ///
-/// - Use `None` if melds are excluded in the ruleset
+/// - Use ``None`` if melds are excluded in the ruleset
 ///   (e.g., Tenhou, Mahjong Soul).
-/// - Provide `Sequence[FuluMianzi]` if melds are included
+/// - Provide ``Sequence[FuluMianzi]`` if melds are included
 ///   (e.g., World Riichi Championship, M.LEAGUE).
 ///
 /// If fewer melds are provided than required for a complete hand,
