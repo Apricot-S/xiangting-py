@@ -21,8 +21,8 @@ def test_mahjong_normal(benchmark: BenchmarkFixture) -> None:
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int], None], dict]:
-        return (next(hand_iter), None), {}
+    def setup() -> tuple[tuple[list[int]], dict]:
+        return (next(hand_iter),), {}
 
     calculator = Shanten()
 
@@ -42,8 +42,8 @@ def test_mahjong_half_flush(benchmark: BenchmarkFixture) -> None:
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int], None], dict]:
-        return (next(hand_iter), None), {}
+    def setup() -> tuple[tuple[list[int]], dict]:
+        return (next(hand_iter),), {}
 
     calculator = Shanten()
 
@@ -63,8 +63,8 @@ def test_mahjong_full_flush(benchmark: BenchmarkFixture) -> None:
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int], None], dict]:
-        return (next(hand_iter), None), {}
+    def setup() -> tuple[tuple[list[int]], dict]:
+        return (next(hand_iter),), {}
 
     calculator = Shanten()
 
@@ -84,8 +84,8 @@ def test_mahjong_non_simple(benchmark: BenchmarkFixture) -> None:
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int], None], dict]:
-        return (next(hand_iter), None), {}
+    def setup() -> tuple[tuple[list[int]], dict]:
+        return (next(hand_iter),), {}
 
     calculator = Shanten()
 
