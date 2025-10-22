@@ -13,7 +13,7 @@ Documentation:
 
 ## Installation
 
-There are 3 options to install this library:
+There are 2 options to install this library:
 
 ### Option 1: Install from PyPI
 
@@ -21,18 +21,7 @@ There are 3 options to install this library:
 pip install xiangting
 ```
 
-### Option 2: Install from wheel
-
-1. Download the wheel file for your platform from the [releases page](https://github.com/Apricot-S/xiangting-py/releases/latest).
-2. Run the following command:
-
-```sh
-pip install PATH/TO/xiangting-{version}-{python tag}-{abitag}-{platform tag}.whl
-```
-
-Replace `PATH/TO/xiangting-{version}-{python tag}-{abitag}-{platform tag}.whl` with the actual path to the wheel file on your system.
-
-### Option 3: Build from source
+### Option 2: Build from source
 
 Requires `cargo`:
 
