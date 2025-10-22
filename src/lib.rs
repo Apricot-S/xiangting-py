@@ -55,7 +55,7 @@ use pyo3::prelude::*;
 ///     >>> print(r)
 ///     0
 ///
-#[pymodule]
+#[pymodule(gil_used = false)]
 fn xiangting(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<ClaimedTilePosition>()?;
     m.add_class::<FuluMianzi>()?;
