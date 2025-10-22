@@ -86,13 +86,15 @@ jobs:
           python-version: |
               3.12
               3.13
+              3.13t
               3.14
+              3.14t
           architecture: ${{ matrix.platform.target }}
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --interpreter 3.12 3.13 3.14
+          args: --release --out dist --interpreter 3.12 3.13 3.13t 3.14 3.14t
           sccache: 'true'
       - name: Upload wheels
         uses: actions/upload-artifact@v4
