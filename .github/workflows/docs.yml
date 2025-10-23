@@ -36,6 +36,8 @@ jobs:
           echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
           echo "VIRTUAL_ENV=$GITHUB_WORKSPACE/.venv" >> $GITHUB_ENV
 
+      - uses: Swatinem/rust-cache@v2
+
       - name: Build wheel
         run: uv build && uv sync --reinstall
 
