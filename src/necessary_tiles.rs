@@ -16,8 +16,8 @@ use pyo3::prelude::*;
 ///
 /// Returns:
 ///     tuple[int, int]: A tuple (rn, nt), where rn is the replacement
-///         number (= xiangting number + 1), and nt is a bit flag set
-///         representing necessary tiles.
+///     number (= xiangting number + 1), and nt is a bit flag set
+///     representing necessary tiles.
 ///
 /// Raises:
 ///     ValueError: If the hand is invalid.
