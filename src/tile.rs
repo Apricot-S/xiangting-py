@@ -7,13 +7,11 @@ use pyo3::prelude::*;
 
 /// Converts the bit flag set into a boolean array.
 ///
-/// Each bit corresponds to a tile index.
-/// The least significant bit (bit 0) represents 1m,
-/// bit 1 represents 2m, …, and bit 33 represents Red (7z).
-///
 /// Args:
 ///     tile_flags (int): Bitmask representing the set of tiles.
-///         Each bit corresponds to a tile index.
+///         Each bit corresponds to a tile index (0-33).
+///         The least significant bit (bit 0) represents 1m,
+///         bit 1 represents 2m, …, and bit 33 represents Red (7z).
 ///
 /// Returns:
 ///     list[bool]: Boolean array of length 34, where ``True`` means
@@ -26,6 +24,8 @@ use pyo3::prelude::*;
 ///     >>> # 1m456p789s12z
 ///     >>> flags = 0b0000011_111000000_000111000_000000001
 ///     >>> arr = to_array(flags)
+///     >>> len(arr)
+///     34
 ///     >>> arr[0]  # 1m
 ///     True
 ///     >>> arr[12] # 4p
