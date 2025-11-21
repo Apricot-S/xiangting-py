@@ -14,7 +14,7 @@ use pyo3::prelude::*;
 ///         bit 1 represents 2m, …, and bit 33 represents Red (7z).
 ///
 /// Returns:
-///     list[bool]: Boolean array of length 34, where ``True`` means
+///     list[bool]: A boolean array of length 34, where ``True`` means
 ///     the tile is present.
 ///
 /// Raises:
