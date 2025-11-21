@@ -40,7 +40,7 @@ lint = [
 ]
 test = [
     "pytest>=8.4.2,<9",
-    "pytest-benchmark>=5.1.0,<6",
+    "pytest-benchmark>=5.2.3,<6",
     "mahjong>=1.4.0",
     "kago-utils",
 ]
@@ -112,7 +112,3 @@ convention = "google"
 
 [tool.mypy]
 exclude = ["^docs/.*\\.py$"]
-
-[[tool.mypy.overrides]]
-module = ["pytest_benchmark.*"]
-ignore_missing_imports = true
