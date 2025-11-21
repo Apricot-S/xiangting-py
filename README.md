@@ -56,7 +56,7 @@ The correspondence between the index and the tile is shown in the table below.
 Calculates the replacement number, which is equal to the deficiency number (a.k.a. xiangting number, 向聴数) + 1.
 
 ```python
-from xiangting import calculate_replacement_number
+from xiangting import PlayerCount, calculate_replacement_number
 
 # 123m456p789s11222z
 hand = [
@@ -66,57 +66,65 @@ hand = [
     2, 3, 0, 0, 0, 0, 0, # z
 ]
 
-replacement_number = calculate_replacement_number(hand, None)
+replacement_number = calculate_replacement_number(hand, PlayerCount.FOUR)
 assert replacement_number == 0
 ```
 
-### Handling Melds
+### Necessary and Unnecessary Tiles
 
-In the calculation for a hand with melds (副露),
-the melded tiles can be included or excluded when counting tiles to determine if a hand contains four identical ones.
+It is also possible to calculate necessary or unnecessary tiles together with the replacement number.
 
-If melds are excluded (e.g., 天鳳 (Tenhou), 雀魂 (Mahjong Soul)), specify `None` for `fulu_mianzi_list`.
+- Necessary tiles
+  - Tiles needed to win with the minimum number of replacements
+  - Tiles that reduce the replacement number when drawn
+  - In Japanese, these are referred to as *有効牌 (yūkōhai)* or *受け入れ (ukeire)*
 
-If melds are included (e.g., World Riichi Championship, M.LEAGUE), the melds should be included in the `fulu_mianzi_list`.
+- Unnecessary tiles
+  - Tiles not needed to win with the minimum number of replacements
+  - Tiles that can be discarded without changing the replacement number
+  - In Japanese, these are referred to as *不要牌 (fuyōhai)* or *余剰牌 (yojōhai)*
 
 ```python
 from xiangting import (
-    ClaimedTilePosition,
-    FuluMianzi,
-    calculate_replacement_number,
+    PlayerCount,
+    calculate_necessary_tiles,
+    calculate_unnecessary_tiles,
 )
 
-# 123m1z
+# 199m146779p12s246z
 hand = [
-    1, 1, 1, 0, 0, 0, 0, 0, 0, # m
-    0, 0, 0, 0, 0, 0, 0, 0, 0, # p
-    0, 0, 0, 0, 0, 0, 0, 0, 0, # s
-    1, 0, 0, 0, 0, 0, 0, # z
+    1, 0, 0, 0, 0, 0, 0, 0, 2, # m
+    1, 0, 0, 1, 0, 1, 2, 0, 1, # p
+    1, 1, 0, 0, 0, 0, 0, 0, 0, # s
+    0, 1, 0, 1, 0, 1, 0, # z
 ]
 
-# 456p 7777s 111z
-melds = [
-    FuluMianzi.Shunzi(12, ClaimedTilePosition.LOW),
-    FuluMianzi.Gangzi(24),
-    FuluMianzi.Kezi(27),
-]
+replacement_number1, necessary_tiles = calculate_necessary_tiles(
+    hand,
+    PlayerCount.FOUR,
+)
+replacement_number2, unnecessary_tiles = calculate_unnecessary_tiles(
+    hand,
+    PlayerCount.FOUR,
+)
 
-replacement_number_wo_melds = calculate_replacement_number(hand, None)
-assert replacement_number_wo_melds == 1
-
-replacement_number_w_melds = calculate_replacement_number(hand, melds)
-assert replacement_number_w_melds == 2
+assert replacement_number1 == 5
+assert replacement_number1 == replacement_number2
+# 1239m123456789p1239s1234567z
+assert necessary_tiles == 0b1111111_100000111_111111111_100000111
+# 1m14679p12s246z
+assert unnecessary_tiles == 0b0101010_000000011_101101001_000000001
 ```
 
 ### Support for Three-Player Mahjong
 
 In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) are not used.
-In addition, melded sequences (明順子) are not allowed.
 
 ```python
 from xiangting import (
-    calculate_replacement_number,
-    calculate_replacement_number_3_player,
+    PlayerCount,
+    calculate_necessary_tiles,
+    calculate_unnecessary_tiles,
 )
 
 # 1111m111122233z
@@ -127,11 +135,18 @@ hand = [
     4, 3, 2, 0, 0, 0, 0, # z
 ]
 
-replacement_number_4p = calculate_replacement_number(hand, None)
-assert replacement_number_4p == 2
+rn_4p, nt_4p = calculate_necessary_tiles(hand, PlayerCount.FOUR)
+_, ut_4p = calculate_unnecessary_tiles(hand, PlayerCount.FOUR)
+assert rn_4p == 2
+assert nt_4p == 0b0000000_000000000_000000000_000000110  # 23m
+assert ut_4p == 0b0000001_000000000_000000000_000000000  # 1z
 
-replacement_number_3p = calculate_replacement_number_3_player(hand, None)
-assert replacement_number_3p == 3
+rn_3p, nt_3p = calculate_necessary_tiles(hand, PlayerCount.THREE)
+_, ut_3p = calculate_unnecessary_tiles(hand, PlayerCount.THREE)
+assert rn_3p == 3
+# 9m123456789p123456789s34567z
+assert nt_3p == 0b1111100_111111111_111111111_100000000
+assert ut_3p == 0b0000001_000000000_000000000_000000001  # 1m1z
 ```
 
 ## License

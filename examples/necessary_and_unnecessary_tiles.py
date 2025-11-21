@@ -16,11 +16,11 @@ hand = [
     0, 1, 0, 1, 0, 1, 0, # z
 ]  # fmt: skip
 
-(replacement_number1, necessary_tiles) = calculate_necessary_tiles(
+replacement_number1, necessary_tiles = calculate_necessary_tiles(
     hand,
     PlayerCount.FOUR,
 )
-(replacement_number2, unnecessary_tiles) = calculate_unnecessary_tiles(
+replacement_number2, unnecessary_tiles = calculate_unnecessary_tiles(
     hand,
     PlayerCount.FOUR,
 )
