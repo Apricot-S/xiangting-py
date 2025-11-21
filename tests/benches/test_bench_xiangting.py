@@ -6,7 +6,7 @@ from typing import Final
 
 from pytest_benchmark.fixture import BenchmarkFixture
 
-from xiangting import calculate_replacement_number
+from xiangting import PlayerCount, calculate_replacement_number
 
 from . import random_hand
 
@@ -22,8 +22,8 @@ def test_xiangting_normal(benchmark: BenchmarkFixture) -> None:
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int], None], dict]:
-        return (next(hand_iter), None), {}
+    def setup() -> tuple[tuple[list[int], PlayerCount], dict]:
+        return (next(hand_iter), PlayerCount.FOUR), {}
 
     benchmark.pedantic(
         calculate_replacement_number,
@@ -41,8 +41,8 @@ def test_xiangting_half_flush(benchmark: BenchmarkFixture) -> None:
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int], None], dict]:
-        return (next(hand_iter), None), {}
+    def setup() -> tuple[tuple[list[int], PlayerCount], dict]:
+        return (next(hand_iter), PlayerCount.FOUR), {}
 
     benchmark.pedantic(
         calculate_replacement_number,
@@ -60,8 +60,8 @@ def test_xiangting_full_flush(benchmark: BenchmarkFixture) -> None:
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int], None], dict]:
-        return (next(hand_iter), None), {}
+    def setup() -> tuple[tuple[list[int], PlayerCount], dict]:
+        return (next(hand_iter), PlayerCount.FOUR), {}
 
     benchmark.pedantic(
         calculate_replacement_number,
@@ -79,8 +79,8 @@ def test_xiangting_non_simple(benchmark: BenchmarkFixture) -> None:
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int], None], dict]:
-        return (next(hand_iter), None), {}
+    def setup() -> tuple[tuple[list[int], PlayerCount], dict]:
+        return (next(hand_iter), PlayerCount.FOUR), {}
 
     benchmark.pedantic(
         calculate_replacement_number,
