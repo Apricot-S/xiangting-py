@@ -28,8 +28,22 @@ use pyo3::prelude::*;
 ///     ...     0, 0, 0, 0, 0, 0, 1, 1, 1, # s
 ///     ...     2, 3, 0, 0, 0, 0, 0, # z
 ///     ... ]
-///     >>> calculate_replacement_number(hand, None)
+///     >>> calculate_replacement_number(hand, PlayerCount.FOUR)
 ///     0
+///
+///     In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) are not used.
+///
+///     >>> # 1111m111122233z
+///     >>> hand = [
+///     ...     4, 0, 0, 0, 0, 0, 0, 0, 0, # m
+///     ...     0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+///     ...     0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+///     ...     4, 3, 2, 0, 0, 0, 0, # z
+///     ... ]
+///     >>> calculate_replacement_number(hand, PlayerCount.FOUR)
+///     2
+///     >>> calculate_replacement_number(hand, PlayerCount.THREE)
+///     3
 ///
 #[pyfunction]
 #[pyo3(signature = (bingpai, player_count))]

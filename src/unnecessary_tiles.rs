@@ -15,21 +15,49 @@ use pyo3::prelude::*;
 ///     player_count (PlayerCount): The number of players.
 ///
 /// Returns:
-///     int: The replacement number (= xiangting number + 1).
+///     tuple[int, int]: A tuple (rn, ut), where rn is the replacement
+///     number (= xiangting number + 1), and ut is a bit flag set
+///     representing unnecessary tiles.
 ///
 /// Raises:
 ///     ValueError: If the hand is invalid.
 ///
 /// Examples:
-///     >>> # 123m456p789s11222z
+///     >>> # 199m146779p12s246z
 ///     >>> hand = [
-///     ...     1, 1, 1, 0, 0, 0, 0, 0, 0, # m
-///     ...     0, 0, 0, 1, 1, 1, 0, 0, 0, # p
-///     ...     0, 0, 0, 0, 0, 0, 1, 1, 1, # s
-///     ...     2, 3, 0, 0, 0, 0, 0, # z
+///     ...     1, 0, 0, 0, 0, 0, 0, 0, 2, # m
+///     ...     1, 0, 0, 1, 0, 1, 2, 0, 1, # p
+///     ...     1, 1, 0, 0, 0, 0, 0, 0, 0, # s
+///     ...     0, 1, 0, 1, 0, 1, 0, # z
 ///     ... ]
-///     >>> calculate_replacement_number(hand, None)
-///     0
+///     >>> rn, ut = calculate_unnecessary_tiles(hand, PlayerCount.FOUR)
+///     >>> rn
+///     5
+///     >>> # 1m14679p12s246z
+///     >>> ut == 0b0101010_000000011_101101001_000000001
+///     True
+///
+///     In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) are not used.
+///
+///     >>> # 1111m111122233z
+///     >>> hand = [
+///     ...     4, 0, 0, 0, 0, 0, 0, 0, 0, # m
+///     ...     0, 0, 0, 0, 0, 0, 0, 0, 0, # p
+///     ...     0, 0, 0, 0, 0, 0, 0, 0, 0, # s
+///     ...     4, 3, 2, 0, 0, 0, 0, # z
+///     ... ]
+///     >>> rn_4p, ut_4p = calculate_unnecessary_tiles(hand, PlayerCount.FOUR)
+///     >>> rn_4p
+///     2
+///     >>> # 1z
+///     >>> ut_4p == 0b0000001_000000000_000000000_000000000
+///     True
+///     >>> rn_3p, ut_3p = calculate_unnecessary_tiles(hand, PlayerCount.THREE)
+///     >>> rn_3p
+///     3
+///     >>> # 1m1z
+///     >>> ut_3p == 0b0000001_000000000_000000000_000000001
+///     True
 ///
 #[pyfunction]
 #[pyo3(signature = (bingpai, player_count))]
