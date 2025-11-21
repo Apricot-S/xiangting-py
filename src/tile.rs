@@ -15,7 +15,7 @@ use pyo3::prelude::*;
 ///
 /// Returns:
 ///     list[bool]: Boolean array of length 34, where ``True`` means
-///         the tile is present.
+///     the tile is present.
 ///
 /// Raises:
 ///     OverflowError: If ``tile_flags`` is greater than ``2**64 - 1``.
