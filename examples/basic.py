@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # This file is part of https://github.com/Apricot-S/xiangting-py
 
-from xiangting import calculate_replacement_number
+from xiangting import PlayerCount, calculate_replacement_number
 
 # 123m456p789s11222z
 hand = [
@@ -12,5 +12,5 @@ hand = [
     2, 3, 0, 0, 0, 0, 0, # z
 ]  # fmt: skip
 
-replacement_number = calculate_replacement_number(hand, None)
+replacement_number = calculate_replacement_number(hand, PlayerCount.FOUR)
 assert replacement_number == 0

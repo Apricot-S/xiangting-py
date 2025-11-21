@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: MIT
 // This file is part of https://github.com/Apricot-S/xiangting-py
 
-mod calculate;
-mod fulu_mianzi;
-mod shoupai;
+mod bingpai;
+mod config;
+mod replacement_number;
 
-use crate::calculate::{calculate_replacement_number, calculate_replacement_number_3_player};
-use crate::fulu_mianzi::{ClaimedTilePosition, FuluMianzi};
+use crate::config::PlayerCount;
+use crate::replacement_number::calculate_replacement_number;
 use pyo3::prelude::*;
 
 /// Python bindings for `xiangting <https://crates.io/crates/xiangting>`_.
@@ -51,15 +51,12 @@ use pyo3::prelude::*;
 ///     ...     0, 0, 0, 0, 0, 0, 1, 1, 1, # s
 ///     ...     2, 3, 0, 0, 0, 0, 0, # z
 ///     ... ]
-///     >>> r = calculate_replacement_number(hand, None)
-///     >>> print(r)
+///     >>> calculate_replacement_number(hand, PlayerCount.FOUR)
 ///     0
 ///
 #[pymodule(gil_used = false)]
 fn xiangting(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_class::<ClaimedTilePosition>()?;
-    m.add_class::<FuluMianzi>()?;
+    m.add_class::<PlayerCount>()?;
     m.add_function(wrap_pyfunction!(calculate_replacement_number, m)?)?;
-    m.add_function(wrap_pyfunction!(calculate_replacement_number_3_player, m)?)?;
     Ok(())
 }
