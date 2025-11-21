@@ -47,7 +47,6 @@ test = [
 docs = [
     "sphinx>=8.2.3,<9",
     "sphinx-rtd-theme>=3.0.2,<4",
-    "scanpydoc[typehints]>=0.15.4",
 ]
 typing = [
     "mypy>=1.18.2,<2",
