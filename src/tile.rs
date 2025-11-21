@@ -13,7 +13,7 @@ use pyo3::prelude::*;
 ///
 /// Args:
 ///     tile_flags (int): Bitmask representing the set of tiles.
-///         Each bit corresponds to one tile index.
+///         Each bit corresponds to a tile index.
 ///
 /// Returns:
 ///     list[bool]: Boolean array of length 34, where ``True`` means
