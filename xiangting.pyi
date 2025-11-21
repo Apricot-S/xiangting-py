@@ -4,6 +4,8 @@
 
 type TileFlags = int
 
+def to_array(tile_flags: TileFlags) -> list[bool]: ...
+
 class PlayerCount:
     FOUR: PlayerCount
     THREE: PlayerCount
