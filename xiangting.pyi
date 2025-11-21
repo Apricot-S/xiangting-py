@@ -2,9 +2,7 @@
 # SPDX-License-Identifier: MIT
 # This file is part of https://github.com/Apricot-S/xiangting-py
 
-type TileFlags = int
-
-def to_array(tile_flags: TileFlags) -> list[bool]: ...
+def to_array(tile_flags: int) -> list[bool]: ...
 
 class PlayerCount:
     FOUR: PlayerCount
@@ -17,8 +15,8 @@ def calculate_replacement_number(
 def calculate_necessary_tiles(
     bingpai: list[int],
     player_count: PlayerCount,
-) -> tuple[int, TileFlags]: ...
+) -> tuple[int, int]: ...
 def calculate_unnecessary_tiles(
     bingpai: list[int],
     player_count: PlayerCount,
-) -> tuple[int, TileFlags]: ...
+) -> tuple[int, int]: ...
