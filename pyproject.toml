@@ -39,7 +39,7 @@ lint = [
     "ruff>=0.14.6,<0.15",
 ]
 test = [
-    "pytest>=8.4.2,<9",
+    "pytest>=9.0.1,<10",
     "pytest-benchmark>=5.2.3,<6",
     "mahjong>=1.4.0",
     "kago-utils",
@@ -61,9 +61,11 @@ kago-utils = { git = "https://github.com/zurukumo/kago-utils", tag = "v0.1.5" }
 [tool.maturin]
 features = ["pyo3/extension-module"]
 
-[tool.pytest.ini_options]
+[tool.pytest]
+minversion = "9.0"
+strict = true
 testpaths = ["tests"]
-addopts = "--benchmark-skip"
+addopts = ["--benchmark-skip"]
 
 [tool.ruff]
 target-version = "py312"
