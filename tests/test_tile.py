@@ -28,7 +28,7 @@ def test_to_array_1m456p789s12z() -> None:
     assert to_array(flags) == arr
 
 
-def test_to_array_err_64bit() -> None:
+def test_to_array_ok_64bit() -> None:
     flags = (1 << 64) - 1
     assert to_array(flags) == [True] * 34
 
