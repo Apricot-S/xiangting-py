@@ -9,7 +9,7 @@
 project = "xiangting"
 copyright = "2024, Apricot S."
 author = "Apricot S."
-release = "4.0.0"
+release = "5.0.0"
 version = release
 
 
@@ -25,12 +25,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
-    "scanpydoc.elegant_typehints",
 ]
-
-qualname_overrides = {
-    "internal.xiangting.FuluMianzi": "xiangting.FuluMianzi",
-}
 
 napoleon_google_docstring = True
 

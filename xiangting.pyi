@@ -2,33 +2,21 @@
 # SPDX-License-Identifier: MIT
 # This file is part of https://github.com/Apricot-S/xiangting-py
 
-from collections.abc import Sequence
+def to_array(tile_flags: int) -> list[bool]: ...
 
-class ClaimedTilePosition:
-    LOW: ClaimedTilePosition
-    MIDDLE: ClaimedTilePosition
-    HIGH: ClaimedTilePosition
-
-class FuluMianzi:
-    class Shunzi(FuluMianzi):
-        def __init__(
-            self,
-            tile: int,
-            position: ClaimedTilePosition,
-            /,
-        ) -> None: ...
-
-    class Kezi(FuluMianzi):
-        def __init__(self, tile: int, /) -> None: ...
-
-    class Gangzi(FuluMianzi):
-        def __init__(self, tile: int, /) -> None: ...
+class PlayerCount:
+    FOUR: PlayerCount
+    THREE: PlayerCount
 
 def calculate_replacement_number(
     bingpai: list[int],
-    fulu_mianzi_list: Sequence[FuluMianzi] | None,
+    player_count: PlayerCount,
 ) -> int: ...
-def calculate_replacement_number_3_player(
+def calculate_necessary_tiles(
     bingpai: list[int],
-    fulu_mianzi_list: Sequence[FuluMianzi] | None,
-) -> int: ...
+    player_count: PlayerCount,
+) -> tuple[int, int]: ...
+def calculate_unnecessary_tiles(
+    bingpai: list[int],
+    player_count: PlayerCount,
+) -> tuple[int, int]: ...

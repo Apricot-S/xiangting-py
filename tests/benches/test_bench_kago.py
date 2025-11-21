@@ -4,7 +4,8 @@
 
 from typing import Final
 
-from mahjong.shanten import Shanten
+from kago_utils.hai_group import HaiGroup
+from kago_utils.shanten import calculate_shanten
 from pytest_benchmark.fixture import BenchmarkFixture
 
 from . import random_hand
@@ -14,83 +15,82 @@ NUM_WARMUP_ROUND: Final = 100_000
 NUM_HAND: Final = NUM_ROUND + NUM_WARMUP_ROUND
 
 
-def test_mahjong_normal(benchmark: BenchmarkFixture) -> None:
+def test_kago_normal(benchmark: BenchmarkFixture) -> None:
     rng = random_hand.create_rng()
     hands = [
-        random_hand.generate_random_pure_hand(rng) for _ in range(NUM_HAND)
+        HaiGroup.from_counter34(random_hand.generate_random_pure_hand(rng))
+        for _ in range(NUM_HAND)
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int]], dict]:
+    def setup() -> tuple[tuple[HaiGroup], dict]:
         return (next(hand_iter),), {}
 
-    calculator = Shanten()
-
     benchmark.pedantic(
-        calculator.calculate_shanten,
+        calculate_shanten,
         setup=setup,
         rounds=NUM_ROUND,
         warmup_rounds=NUM_WARMUP_ROUND,
     )
 
 
-def test_mahjong_half_flush(benchmark: BenchmarkFixture) -> None:
+def test_kago_half_flush(benchmark: BenchmarkFixture) -> None:
     rng = random_hand.create_rng()
     hands = [
-        random_hand.generate_random_half_flush_pure_hand(rng)
+        HaiGroup.from_counter34(
+            random_hand.generate_random_half_flush_pure_hand(rng),
+        )
         for _ in range(NUM_HAND)
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int]], dict]:
+    def setup() -> tuple[tuple[HaiGroup], dict]:
         return (next(hand_iter),), {}
 
-    calculator = Shanten()
-
     benchmark.pedantic(
-        calculator.calculate_shanten,
+        calculate_shanten,
         setup=setup,
         rounds=NUM_ROUND,
         warmup_rounds=NUM_WARMUP_ROUND,
     )
 
 
-def test_mahjong_full_flush(benchmark: BenchmarkFixture) -> None:
+def test_kago_full_flush(benchmark: BenchmarkFixture) -> None:
     rng = random_hand.create_rng()
     hands = [
-        random_hand.generate_random_full_flush_pure_hand(rng)
+        HaiGroup.from_counter34(
+            random_hand.generate_random_full_flush_pure_hand(rng),
+        )
         for _ in range(NUM_HAND)
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int]], dict]:
+    def setup() -> tuple[tuple[HaiGroup], dict]:
         return (next(hand_iter),), {}
 
-    calculator = Shanten()
-
     benchmark.pedantic(
-        calculator.calculate_shanten,
+        calculate_shanten,
         setup=setup,
         rounds=NUM_ROUND,
         warmup_rounds=NUM_WARMUP_ROUND,
     )
 
 
-def test_mahjong_non_simple(benchmark: BenchmarkFixture) -> None:
+def test_kago_non_simple(benchmark: BenchmarkFixture) -> None:
     rng = random_hand.create_rng()
     hands = [
-        random_hand.generate_random_non_simple_pure_hand(rng)
+        HaiGroup.from_counter34(
+            random_hand.generate_random_non_simple_pure_hand(rng),
+        )
         for _ in range(NUM_HAND)
     ]
     hand_iter = iter(hands)
 
-    def setup() -> tuple[tuple[list[int]], dict]:
+    def setup() -> tuple[tuple[HaiGroup], dict]:
         return (next(hand_iter),), {}
 
-    calculator = Shanten()
-
     benchmark.pedantic(
-        calculator.calculate_shanten,
+        calculate_shanten,
         setup=setup,
         rounds=NUM_ROUND,
         warmup_rounds=NUM_WARMUP_ROUND,
