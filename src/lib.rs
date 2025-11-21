@@ -4,10 +4,14 @@
 
 mod bingpai;
 mod config;
+mod necessary_tiles;
 mod replacement_number;
+mod unnecessary_tiles;
 
 use crate::config::PlayerCount;
+use crate::necessary_tiles::calculate_necessary_tiles;
 use crate::replacement_number::calculate_replacement_number;
+use crate::unnecessary_tiles::calculate_unnecessary_tiles;
 use pyo3::prelude::*;
 
 /// Python bindings for `xiangting <https://crates.io/crates/xiangting>`_.
@@ -58,5 +62,7 @@ use pyo3::prelude::*;
 fn xiangting(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PlayerCount>()?;
     m.add_function(wrap_pyfunction!(calculate_replacement_number, m)?)?;
+    m.add_function(wrap_pyfunction!(calculate_necessary_tiles, m)?)?;
+    m.add_function(wrap_pyfunction!(calculate_unnecessary_tiles, m)?)?;
     Ok(())
 }
