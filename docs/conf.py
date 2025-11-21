@@ -25,12 +25,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
-    "scanpydoc.elegant_typehints",
 ]
-
-qualname_overrides = {
-    "internal.xiangting.FuluMianzi": "xiangting.FuluMianzi",
-}
 
 napoleon_google_docstring = True
 

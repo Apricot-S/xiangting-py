@@ -15,8 +15,3 @@ xiangting-py documentation
 
 .. automodule:: xiangting
    :members:
-   :exclude-members: FuluMianzi
-
-.. automodule:: internal.xiangting
-   :members:
-   :exclude-members: ClaimedTilePosition
