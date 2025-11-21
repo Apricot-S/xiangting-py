@@ -15,7 +15,9 @@ use pyo3::prelude::*;
 ///     player_count (PlayerCount): The number of players.
 ///
 /// Returns:
-///     int: The replacement number (= xiangting number + 1).
+///     tuple[int, int]: A tuple (rn, nt), where rn is the replacement
+///         number (= xiangting number + 1), and nt is a bit flag set
+///         representing necessary tiles.
 ///
 /// Raises:
 ///     ValueError: If the hand is invalid.
