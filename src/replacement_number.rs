@@ -7,7 +7,7 @@ use crate::config::PlayerCount;
 use ::xiangting::TileCounts;
 use pyo3::prelude::*;
 
-/// Calculates the replacement number (= xiangting number + 1) for a given hand.
+/// Calculates the replacement number (= xiàngtīng number + 1) for a given hand.
 ///
 /// Args:
 ///     bingpai (list[int]): 兵牌: A hand excluding melds
@@ -15,7 +15,7 @@ use pyo3::prelude::*;
 ///     player_count (PlayerCount): The number of players.
 ///
 /// Returns:
-///     int: The replacement number (= xiangting number + 1).
+///     int: The replacement number (= xiàngtīng number + 1).
 ///
 /// Raises:
 ///     ValueError: If the hand is invalid.

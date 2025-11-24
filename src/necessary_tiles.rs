@@ -7,7 +7,7 @@ use crate::config::PlayerCount;
 use ::xiangting::{TileCounts, TileFlags};
 use pyo3::prelude::*;
 
-/// Calculates the replacement number (= xiangting number + 1) and necessary tiles for a given hand.
+/// Calculates the replacement number (= xiàngtīng number + 1) and necessary tiles for a given hand.
 ///
 /// Args:
 ///     bingpai (list[int]): 兵牌: A hand excluding melds
@@ -16,7 +16,7 @@ use pyo3::prelude::*;
 ///
 /// Returns:
 ///     tuple[int, int]: A tuple (rn, nt), where rn is the replacement
-///     number (= xiangting number + 1), and nt is a bit flag set
+///     number (= xiàngtīng number + 1), and nt is a bit flag set
 ///     representing necessary tiles.
 ///
 /// Raises:
