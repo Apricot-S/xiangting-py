@@ -53,7 +53,7 @@ The correspondence between the index and the tile is shown in the table below.
 | ----- | --------- | ---------- | --------- | ---------- | ---------- | ---------- | -------- |
 | Tile  | East (1z) | South (2z) | West (3z) | North (4z) | White (5z) | Green (6z) | Red (7z) |
 
-Calculates the replacement number, which is equal to the deficiency number (a.k.a. xiangting number, 向聴数) + 1.
+Calculates the replacement number, which is equal to the deficiency number (a.k.a. xiàngtīng number, 向聴数) + 1.
 
 ```python
 from xiangting import PlayerCount, calculate_replacement_number

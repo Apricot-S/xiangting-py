@@ -137,9 +137,9 @@ checksum = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
 
 [[package]]
 name = "syn"
-version = "2.0.110"
+version = "2.0.111"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a99801b5bd34ede4cf3fc688c5919368fea4e4814a4664359503e6015b280aea"
+checksum = "390cc9a294ab71bdb1aa2e99d13be9c753cd2d7bd6560c77118597410c4d2e87"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -186,16 +186,16 @@ checksum = "7264e107f553ccae879d21fbea1d6724ac785e8c3bfc762137959b5802826ef3"
 
 [[package]]
 name = "xiangting"
-version = "5.0.0"
+version = "5.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0df2be353c949a5c79b9a640e39f4a0dce66356cd7dc9b3429678253399b04fb"
+checksum = "486e0d7577564f2cebc640a6a144d3438cc1ef536c14d1abd89598a2e35d6b3f"
 dependencies = [
  "thiserror",
 ]
 
 [[package]]
 name = "xiangting-py"
-version = "5.0.0"
+version = "5.0.2"
 dependencies = [
  "pyo3",
  "xiangting",
