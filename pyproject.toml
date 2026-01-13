@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "xiangting"
-version = "5.0.2"
+version = "5.0.3"
 description = "Python bindings for xiangting"
 authors = [{ name = "Apricot S." }]
 license = "MIT"
@@ -42,11 +42,11 @@ test = [
     "pytest>=9.0.1,<10",
     "pytest-benchmark>=5.2.3,<6",
     "mahjong>=1.4.0",
-    "kago-utils",
+    "kago-utils>=0.1.4",
 ]
 docs = [
-    "sphinx>=8.2.3,<9",
-    "sphinx-rtd-theme>=3.0.2,<4",
+    "sphinx>=9.1.0,<10",
+    "sphinx-rtd-theme>=3.1.0,<4",
 ]
 typing = [
     "mypy>=1.18.2,<2",
@@ -54,9 +54,6 @@ typing = [
 build = [
     "maturin>=1.10.2,<2",
 ]
-
-[tool.uv.sources]
-kago-utils = { git = "https://github.com/zurukumo/kago-utils", tag = "v0.1.5" }
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
