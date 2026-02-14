@@ -16,6 +16,9 @@ on:
       - src/**
       - .github/workflows/docs.yml
 
+permissions:
+  contents: read
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
