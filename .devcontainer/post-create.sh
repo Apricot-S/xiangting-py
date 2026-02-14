@@ -21,5 +21,5 @@ sudo chown -R vscode:vscode /workspaces/xiangting-py
 
 chmod +x scripts/*.sh
 
-python3 -m venv .venv # for `maturin develop`
+export UV_LINK_MODE=copy
 uv sync
