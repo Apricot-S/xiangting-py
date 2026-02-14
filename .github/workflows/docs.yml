@@ -11,6 +11,7 @@ on:
   pull_request:
     branches:
       - main
+      - develop
     paths:
       - docs/**
       - src/**
@@ -56,6 +57,7 @@ jobs:
           path: docs/_build/html
 
   deploy:
+    if: github.event_name == 'push'
     needs: build-docs
     permissions:
       pages: write
