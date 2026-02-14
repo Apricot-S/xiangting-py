@@ -17,6 +17,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -55,9 +56,6 @@ typing = [
 build = [
     "maturin>=1.12.0,<2",
 ]
-
-[tool.maturin]
-features = ["pyo3/extension-module"]
 
 [tool.pytest]
 minversion = "9.0"
