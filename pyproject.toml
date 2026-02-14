@@ -1,5 +1,5 @@
 [build-system]
-requires = ["maturin>=1.10,<2.0"]
+requires = ["maturin>=1.12,<2.0"]
 build-backend = "maturin"
 
 [project]
@@ -51,7 +51,7 @@ typing = [
     "mypy>=1.18.2,<2",
 ]
 build = [
-    "maturin>=1.10.2,<2",
+    "maturin>=1.12.0,<2",
 ]
 
 [tool.maturin]
