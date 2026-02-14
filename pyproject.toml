@@ -10,7 +10,7 @@ authors = [{ name = "Apricot S." }]
 license = "MIT"
 license-files = ["LICENSE", "THIRD-PARTY-NOTICES.md"]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 keywords = ["mahjong", "riichi", "shanten", "xiangting"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -18,6 +18,8 @@ classifiers = [
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
@@ -44,7 +46,7 @@ test = [
     "mahjong>=1.4.0",
 ]
 docs = [
-    "sphinx>=9.1.0,<10",
+    "sphinx>=8.1.3,<10",
     "sphinx-rtd-theme>=3.1.0,<4",
 ]
 typing = [
@@ -64,7 +66,6 @@ testpaths = ["tests"]
 addopts = ["--benchmark-skip"]
 
 [tool.ruff]
-target-version = "py312"
 src = ["python"]
 line-length = 79
 
