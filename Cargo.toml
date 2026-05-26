@@ -1,6 +1,6 @@
 [package]
 name = "xiangting-py"
-version = "5.0.4"
+version = "5.0.5"
 description = "Python bindings for xiangting"
 authors = ["Apricot S."]
 edition = "2024"
