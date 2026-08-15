@@ -74,7 +74,7 @@ select = ["ALL"]
 ignore = [
     "D", # pydocstyle
 
-    # "C901",    # complex-structure
+    "COM812",  # missing-trailing-comma
     "ANN002",  # missing-type-args
     "ANN003",  # missing-type-kwargs
     "TD002",   # missing-todo-author
