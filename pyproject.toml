@@ -1,5 +1,5 @@
 [build-system]
-requires = ["maturin>=1.13,<2.0"]
+requires = ["maturin>=1.14,<2.0"]
 build-backend = "maturin"
 
 [project]
@@ -55,7 +55,7 @@ typing = [
     "ty>=0.0.72",
 ]
 build = [
-    "maturin>=1.13.3,<2",
+    "maturin>=1.14.1,<2",
 ]
 
 [tool.pytest]
