@@ -2,10 +2,11 @@
 // SPDX-License-Identifier: MIT
 // This file is part of https://github.com/Apricot-S/xiangting-py
 
-use crate::bingpai::BingpaiError;
-use crate::config::PlayerCount;
 use ::xiangting::TileCounts;
 use pyo3::prelude::*;
+
+use crate::bingpai::BingpaiError;
+use crate::config::PlayerCount;
 
 /// Calculates the replacement number (= xiàngtīng number + 1) for a given hand.
 ///
