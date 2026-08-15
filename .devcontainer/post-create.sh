@@ -12,4 +12,4 @@ if [[ -t 1 ]] && type -t tput >/dev/null; then
   fi
 fi
 
-UV_LINK_MODE=copy uv sync
+uv sync

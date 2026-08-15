@@ -12,6 +12,9 @@
 		},
 		"ghcr.io/va-h/devcontainers-features/uv:1": {}
 	},
+	"containerEnv": {
+		"UV_LINK_MODE": "copy"
+	},
 
 	// Use 'mounts' to make the cargo cache persistent in a Docker Volume.
 	"mounts": [
