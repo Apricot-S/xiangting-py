@@ -160,12 +160,12 @@ def calculate_unnecessary_tiles(
     Args:
         bingpai (list[int]): 兵牌: A hand excluding melds
             (a.k.a. pure hand, 純手牌).
-            player_count (PlayerCount): The number of players.
+        player_count (PlayerCount): The number of players.
 
     Returns:
         tuple[int, int]: A tuple (rn, ut), where rn is the replacement
         number (= xiàngtīng number + 1), and ut is a bit flag set
-            representing unnecessary tiles.
+        representing unnecessary tiles.
 
     Raises:
         ValueError: If the hand is invalid.
@@ -183,7 +183,7 @@ def calculate_unnecessary_tiles(
         5
         >>> # 1m14679p12s246z
         >>> ut == 0b0101010_000000011_101101001_000000001
-            True
+        True
 
         In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬)
         are not used.
