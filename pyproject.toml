@@ -52,7 +52,7 @@ docs = [
     "sphinx-rtd-theme>=3.1.0,<4",
 ]
 typing = [
-    "ty>=0.0.39",
+    "ty>=0.0.72",
 ]
 build = [
     "maturin>=1.13.3,<2",
