@@ -12,14 +12,4 @@ if [[ -t 1 ]] && type -t tput >/dev/null; then
   fi
 fi
 
-sudo apt-get update
-sudo apt-get clean
-sudo rm -rf /var/lib/apt/lists/*
-
-sudo chown vscode:vscode /workspaces
-sudo chown -R vscode:vscode /workspaces/xiangting-py
-
-chmod +x scripts/*.sh
-
-export UV_LINK_MODE=copy
-uv sync
+UV_LINK_MODE=copy uv sync
