@@ -65,7 +65,7 @@ pub(crate) fn calculate_necessary_tiles(
     bingpai: TileCounts,
     player_count: PlayerCount,
 ) -> PyResult<(u8, TileFlags)> {
-    ::xiangting::calculate_necessary_tiles(&bingpai, &player_count.into())
+    ::xiangting::calculate_necessary_tiles(&bingpai, player_count.into())
         .map_err(self::BingpaiError::from)
         .map_err(PyErr::from)
 }

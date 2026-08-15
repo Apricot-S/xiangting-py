@@ -51,7 +51,7 @@ pub(crate) fn calculate_replacement_number(
     bingpai: TileCounts,
     player_count: PlayerCount,
 ) -> PyResult<u8> {
-    ::xiangting::calculate_replacement_number(&bingpai, &player_count.into())
+    ::xiangting::calculate_replacement_number(&bingpai, player_count.into())
         .map_err(self::BingpaiError::from)
         .map_err(PyErr::from)
 }
