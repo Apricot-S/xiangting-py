@@ -66,6 +66,7 @@ addopts = ["--benchmark-skip"]
 
 [tool.ruff]
 src = ["python"]
+extend-exclude = ["*.md"]
 line-length = 79
 
 [tool.ruff.lint]
