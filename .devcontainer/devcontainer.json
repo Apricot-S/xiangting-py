@@ -12,6 +12,9 @@
 		},
 		"ghcr.io/va-h/devcontainers-features/uv:1": {}
 	},
+	"containerEnv": {
+		"UV_LINK_MODE": "copy"
+	},
 
 	// Use 'mounts' to make the cargo cache persistent in a Docker Volume.
 	"mounts": [
@@ -34,7 +37,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "bash .devcontainer/post-create.sh",
+	"postCreateCommand": "uv sync",
 
 	// Configure tool-specific properties.
 	"customizations": {
