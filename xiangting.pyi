@@ -50,8 +50,7 @@ class PlayerCount:
 def calculate_replacement_number(
     bingpai: list[int], player_count: PlayerCount
 ) -> int:
-    """Calculates the replacement number (= xiàngtīng number + 1) for a
-    given hand.
+    """Calculates the replacement number (= xiàngtīng number + 1) for a given hand.
 
     Args:
         bingpai (list[int]): 兵牌: A hand excluding melds
@@ -75,8 +74,7 @@ def calculate_replacement_number(
         >>> calculate_replacement_number(hand, PlayerCount.FOUR)
         0
 
-        In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬)
-        are not used.
+        In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) are not used.
 
         >>> # 1111m111122233z
         >>> hand = [
@@ -95,8 +93,7 @@ def calculate_necessary_tiles(
     bingpai: list[int],
     player_count: PlayerCount,
 ) -> tuple[int, int]:
-    """Calculates the replacement number (= xiàngtīng number + 1) and
-    necessary tiles for a given hand.
+    """Calculates the replacement number (= xiàngtīng number + 1) and necessary tiles for a given hand.
 
     Args:
         bingpai (list[int]): 兵牌: A hand excluding melds
@@ -126,8 +123,7 @@ def calculate_necessary_tiles(
         >>> nt == 0b1111111_100000111_111111111_100000111
         True
 
-        In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬)
-        are not used.
+        In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) are not used.
 
         >>> # 1111m111122233z
         >>> hand = [
@@ -154,8 +150,7 @@ def calculate_unnecessary_tiles(
     bingpai: list[int],
     player_count: PlayerCount,
 ) -> tuple[int, int]:
-    """Calculates the replacement number (= xiàngtīng number + 1) and
-    unnecessary tiles for a given hand.
+    """Calculates the replacement number (= xiàngtīng number + 1) and unnecessary tiles for a given hand.
 
     Args:
         bingpai (list[int]): 兵牌: A hand excluding melds
@@ -185,8 +180,7 @@ def calculate_unnecessary_tiles(
         >>> ut == 0b0101010_000000011_101101001_000000001
         True
 
-        In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬)
-        are not used.
+        In three-player mahjong, the tiles from 2m (二萬) to 8m (八萬) are not used.
 
         >>> # 1111m111122233z
         >>> hand = [

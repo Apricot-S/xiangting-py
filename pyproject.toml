@@ -103,6 +103,7 @@ convention = "google"
 [tool.ruff.lint.extend-per-file-ignores]
 "./xiangting.pyi" = [
     "PYI021",  # docstring-in-stub
+    "E501",    # line-too-long
     "W505",    # doc-line-too-long
 ]
 "./examples/*" = [
