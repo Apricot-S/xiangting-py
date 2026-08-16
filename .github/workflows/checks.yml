@@ -26,9 +26,7 @@ jobs:
         with:
           python-version: '3.14'
       - name: Set up Rust
-        uses: dtolnay/rust-toolchain@1.85
-        with:
-          components: rustfmt, clippy
+        run: rustup show active-toolchain
       - uses: Swatinem/rust-cache@v2
       - name: Check formatting
         run: cargo fmt --all --check
