@@ -101,6 +101,11 @@ convention = "google"
 "docs/**.py" = ["ALL"]
 
 [tool.ruff.lint.extend-per-file-ignores]
+"./xiangting.pyi" = [
+    "PYI021",  # docstring-in-stub
+    "E501",    # line-too-long
+    "W505",    # doc-line-too-long
+]
 "./examples/*" = [
     "S101",    # assert
     "INP001",  # implicit-namespace-package
