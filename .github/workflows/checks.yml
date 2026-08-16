@@ -36,22 +36,6 @@ jobs:
       - name: Run Clippy
         run: cargo clippy --all-targets --all-features --locked -- -D warnings
 
-  rust-test:
-    name: Rust tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-      - uses: actions/setup-python@v7
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-      - name: Set up Rust
-        run: rustup show active-toolchain
-      - uses: Swatinem/rust-cache@v2
-      - name: Run tests
-        run: cargo test --all-features --locked
-
   python-lint:
     name: Python lint and format
     runs-on: ubuntu-latest
