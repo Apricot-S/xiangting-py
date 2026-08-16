@@ -10,6 +10,9 @@ on:
 permissions:
   contents: read
 
+env:
+  PYTHON_VERSION: '3.14'
+
 concurrency:
   group: checks-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -24,7 +27,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.14'
+          python-version: ${{ env.PYTHON_VERSION }}
       - name: Set up Rust
         run: rustup show active-toolchain
       - uses: Swatinem/rust-cache@v2
@@ -44,7 +47,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.14'
+          python-version: ${{ env.PYTHON_VERSION }}
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
       - name: Install lint dependencies
@@ -67,7 +70,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.14'
+          python-version: ${{ env.PYTHON_VERSION }}
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
       - name: Install type-checking dependencies
@@ -89,7 +92,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.14'
+          python-version: ${{ env.PYTHON_VERSION }}
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
       - uses: Swatinem/rust-cache@v2
