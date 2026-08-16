@@ -3,12 +3,14 @@
 #
 #    maturin generate-ci github
 #
-# Then rename the generated workflow to release.yml and restore the
-# release-only triggers below.
+# Then rename the generated workflow to release.yml and restore the build
+# triggers below.
 name: Build and release distributions
 
 on:
   push:
+    branches:
+      - main
     tags:
       - '*'
   workflow_dispatch:
