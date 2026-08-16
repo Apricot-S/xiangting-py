@@ -48,7 +48,8 @@ class PlayerCount:
     THREE: PlayerCount
 
 def calculate_replacement_number(
-    bingpai: list[int], player_count: PlayerCount
+    bingpai: list[int],
+    player_count: PlayerCount,
 ) -> int:
     """Calculates the replacement number (= xiàngtīng number + 1) for a given hand.
 
