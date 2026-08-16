@@ -61,6 +61,29 @@ jobs:
       - name: Run Ruff
         run: uv run --no-sync ruff check .
 
+  python-type:
+    name: Python type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.0.1
+      - name: Install type-checking dependencies
+        run: >-
+          uv sync
+          --locked
+          --no-default-groups
+          --group typing
+          --group test
+          --no-install-project
+      - name: Run ty
+        run: uv run --no-sync ty check
+
   python-test:
     name: Python tests
     runs-on: ubuntu-latest
