@@ -2,10 +2,11 @@
 // SPDX-License-Identifier: MIT
 // This file is part of https://github.com/Apricot-S/xiangting-py
 
-use crate::bingpai::BingpaiError;
-use crate::config::PlayerCount;
 use ::xiangting::{TileCounts, TileFlags};
 use pyo3::prelude::*;
+
+use crate::bingpai::BingpaiError;
+use crate::config::PlayerCount;
 
 /// Calculates the replacement number (= xiàngtīng number + 1) and unnecessary tiles for a given hand.
 ///
@@ -65,7 +66,7 @@ pub(crate) fn calculate_unnecessary_tiles(
     bingpai: TileCounts,
     player_count: PlayerCount,
 ) -> PyResult<(u8, TileFlags)> {
-    ::xiangting::calculate_unnecessary_tiles(&bingpai, &player_count.into())
+    ::xiangting::calculate_unnecessary_tiles(&bingpai, player_count.into())
         .map_err(self::BingpaiError::from)
         .map_err(PyErr::from)
 }

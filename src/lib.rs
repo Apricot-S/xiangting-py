@@ -9,12 +9,13 @@ mod replacement_number;
 mod tile;
 mod unnecessary_tiles;
 
+use pyo3::prelude::*;
+
 use crate::config::PlayerCount;
 use crate::necessary_tiles::calculate_necessary_tiles;
 use crate::replacement_number::calculate_replacement_number;
 use crate::tile::to_array;
 use crate::unnecessary_tiles::calculate_unnecessary_tiles;
-use pyo3::prelude::*;
 
 /// Python bindings for `xiangting <https://crates.io/crates/xiangting>`_.
 ///
