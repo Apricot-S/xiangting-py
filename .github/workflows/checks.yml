@@ -52,7 +52,6 @@ jobs:
       - name: Install lint dependencies
         run: >-
           uv sync
-          --locked
           --no-default-groups
           --group lint
           --no-install-project
@@ -76,7 +75,6 @@ jobs:
       - name: Install type-checking dependencies
         run: >-
           uv sync
-          --locked
           --no-default-groups
           --group typing
           --group test
@@ -100,7 +98,6 @@ jobs:
       - name: Build and install project
         run: >-
           uv sync
-          --locked
           --no-default-groups
           --group test
       - name: Run tests
