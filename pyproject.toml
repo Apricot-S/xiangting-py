@@ -29,6 +29,7 @@ classifiers = [
 ]
 
 [project.urls]
+Documentation = "https://apricot-s.github.io/xiangting-py"
 Repository = "https://github.com/Apricot-S/xiangting-py"
 
 [dependency-groups]
