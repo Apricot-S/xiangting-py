@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "xiangting"
-version = "6.0.0"
+version = "6.0.1"
 description = "Python bindings for xiangting"
 authors = [{ name = "Apricot S." }]
 license = "MIT"
@@ -29,6 +29,7 @@ classifiers = [
 ]
 
 [project.urls]
+Documentation = "https://apricot-s.github.io/xiangting-py"
 Repository = "https://github.com/Apricot-S/xiangting-py"
 
 [dependency-groups]
@@ -40,7 +41,7 @@ dev = [
     { include-group = "build" },
 ]
 lint = [
-    "ruff>=0.16.3,<0.17",
+    "ruff>=0.16.4,<0.17",
 ]
 test = [
     "pytest>=9.1.1,<10",
@@ -52,7 +53,7 @@ docs = [
     "sphinx-rtd-theme>=3.1.0,<4",
 ]
 typing = [
-    "ty>=0.0.72",
+    "ty>=0.0.73",
 ]
 build = [
     "maturin>=1.14.1,<2",
