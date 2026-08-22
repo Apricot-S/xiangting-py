@@ -41,7 +41,7 @@ dev = [
     { include-group = "build" },
 ]
 lint = [
-    "ruff>=0.16.3,<0.17",
+    "ruff>=0.16.4,<0.17",
 ]
 test = [
     "pytest>=9.1.1,<10",
