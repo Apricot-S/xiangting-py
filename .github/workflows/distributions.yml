@@ -3,9 +3,9 @@
 #
 #    maturin generate-ci github
 #
-# Then rename the generated workflow to release.yml and restore the build
+# Then rename the generated workflow to distributions.yml and restore the build
 # triggers below.
-name: Build and release distributions
+name: Build, test, and release distributions
 
 on:
   push:
@@ -38,7 +38,9 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: >-
+            ${{ matrix.python-version == 'graalpy3.12' &&
+            'graalpy-25.2' || matrix.python-version }}
       - uses: Swatinem/rust-cache@v2
       - name: Build wheels
         uses: PyO3/maturin-action@v1
@@ -47,11 +49,32 @@ jobs:
           args: --release --out dist --interpreter ${{ matrix.python-version }}
           sccache: 'true'
           manylinux: auto
+      - name: Install uv
+        if: ${{ matrix.platform.target == 'x86_64' }}
+        uses: astral-sh/setup-uv@v10.0.1
+      - name: Test wheel
+        if: ${{ matrix.platform.target == 'x86_64' }}
+        run: |
+          uv sync --python python --no-default-groups --group test --no-install-project
+          uv pip install --python .venv --reinstall dist/*.whl
+          uv run --no-sync pytest
       - name: Upload wheels
+        if: >-
+          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
+          github.event_name == 'workflow_dispatch') }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-linux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
           path: dist
+          if-no-files-found: error
+      - name: Upload failed wheels for investigation
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: failed-wheels-linux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
+          path: dist
+          if-no-files-found: ignore
+          retention-days: 3
 
   musllinux:
     runs-on: ${{ matrix.platform.runner }}
@@ -79,10 +102,22 @@ jobs:
           sccache: 'true'
           manylinux: musllinux_1_2
       - name: Upload wheels
+        if: >-
+          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
+          github.event_name == 'workflow_dispatch') }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-musllinux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
           path: dist
+          if-no-files-found: error
+      - name: Upload failed wheels for investigation
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: failed-wheels-musllinux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
+          path: dist
+          if-no-files-found: ignore
+          retention-days: 3
 
   windows:
     runs-on: ${{ matrix.platform.runner }}
@@ -98,7 +133,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: ${{ matrix.python-version }}
           architecture: ${{ matrix.platform.target }}
       - uses: Swatinem/rust-cache@v2
       - name: Build wheels
@@ -107,11 +142,32 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --interpreter ${{ matrix.python-version }}
           sccache: 'true'
-      - name: Upload wheels
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.0.1
+      - name: Test wheel
+        shell: pwsh
+        run: |
+          uv sync --python python --no-default-groups --group test --no-install-project
+          $wheel = Get-ChildItem dist\*.whl | Select-Object -First 1 -ExpandProperty FullName
+          uv pip install --python .venv --reinstall $wheel
+          uv run --no-sync pytest
+      - name: Upload tested wheels
+        if: >-
+          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
+          github.event_name == 'workflow_dispatch') }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-windows-${{ matrix.platform.target }}-py${{ matrix.python-version }}
           path: dist
+          if-no-files-found: error
+      - name: Upload failed wheels for investigation
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: failed-wheels-windows-${{ matrix.platform.target }}-py${{ matrix.python-version }}
+          path: dist
+          if-no-files-found: ignore
+          retention-days: 3
 
   macos:
     runs-on: ${{ matrix.platform.runner }}
@@ -127,7 +183,9 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: >-
+            ${{ matrix.python-version == 'graalpy3.12' &&
+            'graalpy-25.2' || matrix.python-version }}
       - uses: Swatinem/rust-cache@v2
       - name: Build wheels
         uses: PyO3/maturin-action@v1
@@ -135,11 +193,30 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --interpreter ${{ matrix.python-version }}
           sccache: 'true'
-      - name: Upload wheels
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.0.1
+      - name: Test wheel
+        run: |
+          uv sync --python python --no-default-groups --group test --no-install-project
+          uv pip install --python .venv --reinstall dist/*.whl
+          uv run --no-sync pytest
+      - name: Upload tested wheels
+        if: >-
+          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
+          github.event_name == 'workflow_dispatch') }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-macos-${{ matrix.platform.target }}-py${{ matrix.python-version }}
           path: dist
+          if-no-files-found: error
+      - name: Upload failed wheels for investigation
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: failed-wheels-macos-${{ matrix.platform.target }}-py${{ matrix.python-version }}
+          path: dist
+          if-no-files-found: ignore
+          retention-days: 3
 
   sdist:
     runs-on: ubuntu-latest
@@ -156,11 +233,30 @@ jobs:
         with:
           command: sdist
           args: --out dist
-      - name: Upload sdist
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.0.1
+      - name: Test sdist
+        run: |
+          uv sync --python python --no-default-groups --group test --no-install-project
+          uv pip install --python .venv --reinstall dist/*.tar.gz
+          uv run --no-sync pytest
+      - name: Upload tested sdist
+        if: >-
+          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
+          github.event_name == 'workflow_dispatch') }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-sdist
           path: dist
+          if-no-files-found: error
+      - name: Upload failed sdist for investigation
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: failed-wheels-sdist
+          path: dist
+          if-no-files-found: ignore
+          retention-days: 3
 
   release:
     name: Release
