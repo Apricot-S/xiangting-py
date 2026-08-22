@@ -166,7 +166,7 @@ dependencies = [
 
 [[package]]
 name = "xiangting-py"
-version = "6.0.0"
+version = "6.0.1"
 dependencies = [
  "pyo3",
  "xiangting",
