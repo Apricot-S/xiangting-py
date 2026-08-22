@@ -57,22 +57,12 @@ jobs:
           uv pip install --python .venv --reinstall dist/*.whl
           uv run --no-sync pytest
       - name: Upload wheels
-        if: >-
-          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
-          github.event_name == 'workflow_dispatch') }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-linux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
           path: dist
           if-no-files-found: error
-      - name: Upload failed wheels for investigation
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: failed-wheels-linux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
-          path: dist
-          if-no-files-found: ignore
-          retention-days: 3
 
   musllinux:
     runs-on: ${{ matrix.platform.runner }}
@@ -135,22 +125,12 @@ jobs:
               /tmp/test-env/bin/python -m pytest
             '
       - name: Upload wheels
-        if: >-
-          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
-          github.event_name == 'workflow_dispatch') }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-musllinux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
           path: dist
           if-no-files-found: error
-      - name: Upload failed wheels for investigation
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: failed-wheels-musllinux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
-          path: dist
-          if-no-files-found: ignore
-          retention-days: 3
 
   windows:
     runs-on: ${{ matrix.platform.runner }}
@@ -185,22 +165,12 @@ jobs:
           uv pip install --python .venv --reinstall $wheel
           uv run --no-sync pytest
       - name: Upload tested wheels
-        if: >-
-          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
-          github.event_name == 'workflow_dispatch') }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-windows-${{ matrix.platform.target }}-py${{ matrix.python-version }}
           path: dist
           if-no-files-found: error
-      - name: Upload failed wheels for investigation
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: failed-wheels-windows-${{ matrix.platform.target }}-py${{ matrix.python-version }}
-          path: dist
-          if-no-files-found: ignore
-          retention-days: 3
 
   macos:
     runs-on: ${{ matrix.platform.runner }}
@@ -234,22 +204,12 @@ jobs:
           uv pip install --python .venv --reinstall dist/*.whl
           uv run --no-sync pytest
       - name: Upload tested wheels
-        if: >-
-          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
-          github.event_name == 'workflow_dispatch') }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-macos-${{ matrix.platform.target }}-py${{ matrix.python-version }}
           path: dist
           if-no-files-found: error
-      - name: Upload failed wheels for investigation
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: failed-wheels-macos-${{ matrix.platform.target }}-py${{ matrix.python-version }}
-          path: dist
-          if-no-files-found: ignore
-          retention-days: 3
 
   sdist:
     runs-on: ubuntu-latest
@@ -274,22 +234,12 @@ jobs:
           uv pip install --python .venv --reinstall dist/*.tar.gz
           uv run --no-sync pytest
       - name: Upload tested sdist
-        if: >-
-          ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
-          github.event_name == 'workflow_dispatch') }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
           name: wheels-sdist
           path: dist
           if-no-files-found: error
-      - name: Upload failed sdist for investigation
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: failed-wheels-sdist
-          path: dist
-          if-no-files-found: ignore
-          retention-days: 3
 
   release:
     name: Release
