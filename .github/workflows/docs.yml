@@ -20,6 +20,9 @@ on:
 permissions:
   contents: read
 
+env:
+  PYTHON_VERSION: '3.14'
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -31,7 +34,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.x'
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
@@ -45,7 +48,11 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Build wheel
-        run: uv build && uv sync --reinstall
+        run: >-
+          uv build && uv sync
+          --reinstall
+          --no-default-groups
+          --group docs
 
       - name: Build Python documentation
         working-directory: docs
