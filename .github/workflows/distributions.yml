@@ -99,6 +99,41 @@ jobs:
           args: --release --out dist --interpreter ${{ matrix.python-version }}
           sccache: 'true'
           manylinux: musllinux_1_2
+      - name: Test wheel
+        if: >-
+          ${{ !startsWith(matrix.python-version, 'pypy') &&
+          !startsWith(matrix.python-version, 'graalpy') }}
+        env:
+          TEST_PYTHON_VERSION: ${{ matrix.python-version }}
+          TEST_ARCH: ${{ matrix.platform.target }}
+        run: |
+          case "$TEST_PYTHON_VERSION" in
+            3.14t)
+              python_abi=cp314-cp314t
+              ;;
+            *)
+              python_tag="${TEST_PYTHON_VERSION//./}"
+              python_abi="cp${python_tag}-cp${python_tag}"
+              ;;
+          esac
+
+          docker run --rm \
+            --volume "$GITHUB_WORKSPACE:/io" \
+            --workdir /io \
+            --env "PYTHON_ABI=$python_abi" \
+            "quay.io/pypa/musllinux_1_2_${TEST_ARCH}" \
+            /bin/sh -euxc '
+              python="/opt/python/${PYTHON_ABI}/bin/python"
+
+              "$python" -m venv /tmp/test-env
+              /tmp/test-env/bin/python -m pip install \
+                "pytest>=9.1.1,<10" \
+                "pytest-benchmark>=5.2.3,<6" \
+                "mahjong>=2.0.0"
+              /tmp/test-env/bin/python -m pip install --force-reinstall \
+                /io/dist/*.whl
+              /tmp/test-env/bin/python -m pytest
+            '
       - name: Upload wheels
         if: >-
           ${{ success() && (startsWith(github.ref, 'refs/tags/') ||
