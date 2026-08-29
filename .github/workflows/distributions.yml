@@ -31,22 +31,38 @@ jobs:
             target: x86_64
           - runner: ubuntu-24.04-arm
             target: aarch64
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.14t", "pypy3.11", "graalpy3.12"]
+        python: &python-versions
+          - interpreter: "3.10"
+            setup: "3.10"
+          - interpreter: "3.11"
+            setup: "3.11"
+          - interpreter: "3.12"
+            setup: "3.12"
+          - interpreter: "3.13"
+            setup: "3.13"
+          - interpreter: "3.14"
+            setup: "3.14"
+          - interpreter: "3.14t"
+            setup: "3.14t"
+          - interpreter: pypy3.11
+            setup: pypy3.11
+          - interpreter: graalpy3.12
+            setup: graalpy-25.2
+          - interpreter: graalpy3.13
+            setup: graalpy-25.3
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: >-
-            ${{ matrix.python-version == 'graalpy3.12' &&
-            'graalpy-25.2' || matrix.python-version }}
+          python-version: ${{ matrix.python.setup }}
       - uses: Swatinem/rust-cache@v2
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --interpreter ${{ matrix.python-version }}
+          args: --release --out dist --interpreter ${{ matrix.python.interpreter }}
           sccache: 'true'
           manylinux: auto
       - name: Install uv
@@ -60,7 +76,7 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
-          name: wheels-linux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
+          name: wheels-linux-${{ matrix.platform.target }}-py${{ matrix.python.interpreter }}
           path: dist
           if-no-files-found: error
 
@@ -73,7 +89,7 @@ jobs:
             target: x86_64
           - runner: ubuntu-24.04-arm
             target: aarch64
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.14t", "pypy3.11", "graalpy3.12"]
+        python: *python-versions
     steps:
       - uses: actions/checkout@v7
         with:
@@ -86,15 +102,15 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --interpreter ${{ matrix.python-version }}
+          args: --release --out dist --interpreter ${{ matrix.python.interpreter }}
           sccache: 'true'
           manylinux: musllinux_1_2
       - name: Test wheel
         if: >-
-          ${{ !startsWith(matrix.python-version, 'pypy') &&
-          !startsWith(matrix.python-version, 'graalpy') }}
+          ${{ !startsWith(matrix.python.interpreter, 'pypy') &&
+          !startsWith(matrix.python.interpreter, 'graalpy') }}
         env:
-          TEST_PYTHON_VERSION: ${{ matrix.python-version }}
+          TEST_PYTHON_VERSION: ${{ matrix.python.interpreter }}
           TEST_ARCH: ${{ matrix.platform.target }}
         run: |
           case "$TEST_PYTHON_VERSION" in
@@ -128,7 +144,7 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
-          name: wheels-musllinux-${{ matrix.platform.target }}-py${{ matrix.python-version }}
+          name: wheels-musllinux-${{ matrix.platform.target }}-py${{ matrix.python.interpreter }}
           path: dist
           if-no-files-found: error
 
@@ -139,23 +155,21 @@ jobs:
         platform:
           - runner: windows-latest
             target: x64
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.14t", "pypy3.11", "graalpy3.12"]
+        python: *python-versions
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: >-
-            ${{ matrix.python-version == 'graalpy3.12' &&
-            'graalpy-25.2' || matrix.python-version }}
+          python-version: ${{ matrix.python.setup }}
           architecture: ${{ matrix.platform.target }}
       - uses: Swatinem/rust-cache@v2
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --interpreter ${{ matrix.python-version }}
+          args: --release --out dist --interpreter ${{ matrix.python.interpreter }}
           sccache: 'true'
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
@@ -170,7 +184,7 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
-          name: wheels-windows-${{ matrix.platform.target }}-py${{ matrix.python-version }}
+          name: wheels-windows-${{ matrix.platform.target }}-py${{ matrix.python.interpreter }}
           path: dist
           if-no-files-found: error
 
@@ -181,22 +195,20 @@ jobs:
         platform:
           - runner: macos-15
             target: aarch64
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.14t", "pypy3.11", "graalpy3.12"]
+        python: *python-versions
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: >-
-            ${{ matrix.python-version == 'graalpy3.12' &&
-            'graalpy-25.2' || matrix.python-version }}
+          python-version: ${{ matrix.python.setup }}
       - uses: Swatinem/rust-cache@v2
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --interpreter ${{ matrix.python-version }}
+          args: --release --out dist --interpreter ${{ matrix.python.interpreter }}
           sccache: 'true'
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
@@ -209,7 +221,7 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v7
         with:
-          name: wheels-macos-${{ matrix.platform.target }}-py${{ matrix.python-version }}
+          name: wheels-macos-${{ matrix.platform.target }}-py${{ matrix.python.interpreter }}
           path: dist
           if-no-files-found: error
 
