@@ -153,13 +153,26 @@ jobs:
         platform:
           - runner: windows-latest
             target: x64
-        python: *python-versions
+        python:
+          - interpreter: "3.10"
+            setup: "3.10"
+          - interpreter: "3.11"
+            setup: "3.11"
+          - interpreter: "3.12"
+            setup: "3.12"
+          - interpreter: "3.13"
+            setup: "3.13"
+          - interpreter: "3.14"
+            setup: "3.14"
+          - interpreter: "3.14t"
+            setup: "3.14t"
+          - interpreter: pypy3.11
+            setup: pypy3.11
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: actions/setup-python@v7
-        id: setup-python
         with:
           python-version: ${{ matrix.python.setup }}
           architecture: ${{ matrix.platform.target }}
@@ -168,7 +181,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --interpreter "${{ steps.setup-python.outputs.python-path }}"
+          args: --release --out dist --interpreter ${{ matrix.python.interpreter }}
           sccache: 'true'
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
