@@ -48,8 +48,6 @@ jobs:
             setup: pypy3.11
           - interpreter: graalpy3.12
             setup: graalpy-25.2
-          - interpreter: graalpy3.13
-            setup: graalpy-25.3
     steps:
       - uses: actions/checkout@v7
         with:
