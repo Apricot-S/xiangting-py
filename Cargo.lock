@@ -157,9 +157,9 @@ checksum = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
 
 [[package]]
 name = "xiangting"
-version = "6.0.1"
+version = "6.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8bd9a8769a7027074127ecb062b6d121eb21c150244bb99854fdd10bcfbae0a8"
+checksum = "2f876f341b7ed1840bc6980f4ed8e3fbb9c2eb02305e91048bdd402d0f61a6f7"
 dependencies = [
  "thiserror",
 ]
