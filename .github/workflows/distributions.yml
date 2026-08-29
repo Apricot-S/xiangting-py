@@ -139,14 +139,16 @@ jobs:
         platform:
           - runner: windows-latest
             target: x64
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.14t"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.14t", "pypy3.11", "graalpy3.12"]
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: >-
+            ${{ matrix.python-version == 'graalpy3.12' &&
+            'graalpy-25.2' || matrix.python-version }}
           architecture: ${{ matrix.platform.target }}
       - uses: Swatinem/rust-cache@v2
       - name: Build wheels
