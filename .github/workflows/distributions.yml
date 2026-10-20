@@ -58,15 +58,21 @@ jobs:
           - &pypy80-python311
             interpreter: pypy3.11
             setup: pypy3.11-v8.0.x
-            linux-interpreter: /opt/pypy/bin/python
+            linux-interpreter: /opt/host-python/bin/python
             manylinux: '2_28'
           - &pypy80-python312
             interpreter: pypy3.12
             setup: pypy3.12-v8.0.x
-            linux-interpreter: /opt/pypy/bin/python
+            linux-interpreter: /opt/host-python/bin/python
             manylinux: '2_28'
-          - interpreter: graalpy3.12
-            setup: graalpy-25.2
+          - &graalpy254-python313
+            interpreter: graalpy3.13
+            setup: graalpy-25.4
+            # Work around maturin 1.15.0's incorrect GraalPy 3.13 ABI mapping.
+            # Remove this host-interpreter override after adopting a release with
+            # https://github.com/PyO3/maturin/pull/3297 and verifying wheel imports.
+            linux-interpreter: /opt/host-python/bin/python
+            manylinux: '2_28'
     steps:
       - uses: actions/checkout@v7
         with:
@@ -82,8 +88,8 @@ jobs:
           args: --release --out dist --interpreter ${{ matrix.python.linux-interpreter || matrix.python.interpreter }}
           sccache: 'true'
           manylinux: ${{ matrix.python.manylinux || 'auto' }}
-          # Use the exact PyPy installed for tests, including its pp80 ABI.
-          docker-options: ${{ matrix.python.linux-interpreter && format('--volume "{0}:/opt/pypy:ro"', env.pythonLocation) || '' }}
+          # Read the ABI from the same PyPy or GraalPy used for tests.
+          docker-options: ${{ matrix.python.linux-interpreter && format('--volume "{0}:/opt/host-python:ro"', env.pythonLocation) || '' }}
       - name: Install uv
         uses: astral-sh/setup-uv@v10.3.0
       - name: Test wheel
@@ -109,10 +115,14 @@ jobs:
           - runner: ubuntu-24.04-arm
             target: aarch64
         python: *python-versions
-        # Official PyPy 8.0 binaries require glibc, not musl.
         exclude:
+          # PyPy 8.0 host binaries require glibc and cannot run on musl.
           - python: *pypy80-python311
           - python: *pypy80-python312
+          # Temporary: maturin 1.15.0 emits the wrong GraalPy 3.13 ABI here,
+          # and the glibc host-interpreter workaround cannot run on musl.
+          # Restore after adopting the fix in PyO3/maturin#3297.
+          - python: *graalpy254-python313
     steps:
       - uses: actions/checkout@v7
         with:
@@ -181,27 +191,7 @@ jobs:
         platform:
           - runner: windows-latest
             target: x64
-        python:
-          - interpreter: "3.10"
-            setup: "3.10"
-          - interpreter: "3.11"
-            setup: "3.11"
-          - interpreter: "3.12"
-            setup: "3.12"
-          - interpreter: "3.13"
-            setup: "3.13"
-          - interpreter: "3.14"
-            setup: "3.14"
-          - interpreter: "3.14t"
-            setup: "3.14t"
-          - interpreter: "3.15"
-            setup: "3.15"
-          - interpreter: "3.15t"
-            setup: "3.15t"
-          - interpreter: pypy3.11
-            setup: pypy3.11-v7.3.x
-          - *pypy80-python311
-          - *pypy80-python312
+        python: *python-versions
     steps:
       - uses: actions/checkout@v7
         with:
@@ -211,12 +201,19 @@ jobs:
         with:
           python-version: ${{ matrix.python.setup }}
           architecture: ${{ matrix.platform.target }}
+      - name: Locate build interpreter
+        id: build-python
+        shell: pwsh
+        # setup-python can report Scripts/python.exe for GraalPy, which uses bin/.
+        run: |
+          python -c 'import sys; print("path=" + sys.executable)' >> $env:GITHUB_OUTPUT
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: Swatinem/rust-cache@v2
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --interpreter "${{ steps.setup-python.outputs.python-path }}"
+          args: --release --out dist --interpreter "${{ steps.build-python.outputs.path }}"
           sccache: 'true'
       - name: Install uv
         uses: astral-sh/setup-uv@v10.3.0
