@@ -13,6 +13,11 @@ on:
       - main
     tags:
       - '*'
+  pull_request:
+    paths:
+      - '.github/workflows/distributions.yml'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
   workflow_dispatch:
 
 permissions:
