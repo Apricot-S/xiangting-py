@@ -3,9 +3,9 @@
 // This file is part of https://github.com/Apricot-S/xiangting-py
 
 use ::xiangting::{TileCounts, TileFlags};
+use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 
-use crate::bingpai::BingpaiError;
 use crate::config::PlayerCount;
 
 /// Calculates the replacement number (= xiàngtīng number + 1) and necessary tiles for a given hand.
@@ -67,6 +67,5 @@ pub(crate) fn calculate_necessary_tiles(
     player_count: PlayerCount,
 ) -> PyResult<(u8, TileFlags)> {
     ::xiangting::calculate_necessary_tiles(&bingpai, player_count.into())
-        .map_err(self::BingpaiError::from)
-        .map_err(PyErr::from)
+        .map_err(|err| PyValueError::new_err(err.to_string()))
 }
