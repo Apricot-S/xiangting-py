@@ -54,7 +54,7 @@ jobs:
           - interpreter: "3.15t"
             setup: "3.15t"
           - interpreter: pypy3.11
-            setup: pypy3.11
+            setup: pypy3.11-v7.3.x
           - interpreter: graalpy3.12
             setup: graalpy-25.2
     steps:
@@ -183,7 +183,7 @@ jobs:
           - interpreter: "3.15t"
             setup: "3.15t"
           - interpreter: pypy3.11
-            setup: pypy3.11
+            setup: pypy3.11-v7.3.x
     steps:
       - uses: actions/checkout@v7
         with:
