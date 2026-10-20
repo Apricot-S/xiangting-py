@@ -19,7 +19,7 @@ permissions:
   contents: read
 
 env:
-  PYTHON_VERSION: '3.14'
+  PYTHON_VERSION: '3.15'
 
 jobs:
   linux:
@@ -44,6 +44,10 @@ jobs:
             setup: "3.14"
           - interpreter: "3.14t"
             setup: "3.14t"
+          - interpreter: "3.15"
+            setup: "3.15"
+          - interpreter: "3.15t"
+            setup: "3.15t"
           - interpreter: pypy3.11
             setup: pypy3.11
           - interpreter: graalpy3.12
@@ -115,6 +119,9 @@ jobs:
             3.14t)
               python_abi=cp314-cp314t
               ;;
+            3.15t)
+              python_abi=cp315-cp315t
+              ;;
             *)
               python_tag="${TEST_PYTHON_VERSION//./}"
               python_abi="cp${python_tag}-cp${python_tag}"
@@ -166,6 +173,10 @@ jobs:
             setup: "3.14"
           - interpreter: "3.14t"
             setup: "3.14t"
+          - interpreter: "3.15"
+            setup: "3.15"
+          - interpreter: "3.15t"
+            setup: "3.15t"
           - interpreter: pypy3.11
             setup: pypy3.11
     steps:
