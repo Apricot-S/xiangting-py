@@ -191,28 +191,7 @@ jobs:
         platform:
           - runner: windows-latest
             target: x64
-        python:
-          - interpreter: "3.10"
-            setup: "3.10"
-          - interpreter: "3.11"
-            setup: "3.11"
-          - interpreter: "3.12"
-            setup: "3.12"
-          - interpreter: "3.13"
-            setup: "3.13"
-          - interpreter: "3.14"
-            setup: "3.14"
-          - interpreter: "3.14t"
-            setup: "3.14t"
-          - interpreter: "3.15"
-            setup: "3.15"
-          - interpreter: "3.15t"
-            setup: "3.15t"
-          - interpreter: pypy3.11
-            setup: pypy3.11-v7.3.x
-          - *pypy80-python311
-          - *pypy80-python312
-          - *graalpy254-python313
+        python: *python-versions
     steps:
       - uses: actions/checkout@v7
         with:
