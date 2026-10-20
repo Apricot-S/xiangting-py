@@ -212,6 +212,7 @@ jobs:
             setup: pypy3.11-v7.3.x
           - *pypy80-python311
           - *pypy80-python312
+          - *graalpy254-python313
     steps:
       - uses: actions/checkout@v7
         with:
