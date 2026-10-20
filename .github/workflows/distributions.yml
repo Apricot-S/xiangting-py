@@ -65,8 +65,8 @@ jobs:
             setup: pypy3.12-v8.0.x
             linux-interpreter: /opt/pypy/bin/python
             manylinux: '2_28'
-          - interpreter: graalpy3.12
-            setup: graalpy-25.2
+          - interpreter: graalpy3.13
+            setup: graalpy-25.4
     steps:
       - uses: actions/checkout@v7
         with:
