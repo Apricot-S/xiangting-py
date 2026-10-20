@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: MIT
 // This file is part of https://github.com/Apricot-S/xiangting-py
 
-mod bingpai;
 mod config;
 mod necessary_tiles;
 mod replacement_number;

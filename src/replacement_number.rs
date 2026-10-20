@@ -3,9 +3,9 @@
 // This file is part of https://github.com/Apricot-S/xiangting-py
 
 use ::xiangting::TileCounts;
+use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 
-use crate::bingpai::BingpaiError;
 use crate::config::PlayerCount;
 
 /// Calculates the replacement number (= xiàngtīng number + 1) for a given hand.
@@ -53,6 +53,5 @@ pub(crate) fn calculate_replacement_number(
     player_count: PlayerCount,
 ) -> PyResult<u8> {
     ::xiangting::calculate_replacement_number(&bingpai, player_count.into())
-        .map_err(self::BingpaiError::from)
-        .map_err(PyErr::from)
+        .map_err(|err| PyValueError::new_err(err.to_string()))
 }
