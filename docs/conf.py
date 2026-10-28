@@ -6,10 +6,12 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+from importlib import metadata
+
 project = "xiangting"
 copyright = "2024, Apricot S."
 author = "Apricot S."
-release = "6.0.2"
+release = metadata.version("xiangting")
 version = release
 
 
