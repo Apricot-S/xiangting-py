@@ -3,10 +3,10 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-from importlib import metadata
-
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+
+from importlib import metadata
 
 project = "xiangting"
 copyright = "2024, Apricot S."
